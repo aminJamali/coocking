@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color primaryColor = Color(0xFF43056A);
 const MaterialColor primarySwatch = MaterialColor(0xFF43056A, {
-  50: Color(0xFFFFF6FF),
+  50: Color(0xFFE7EBF6),
   100: Color(0xFFFAB5FF),
   200: Color(0xFFCA88F1),
   300: Color(0xFF9C5DC2),
@@ -22,7 +22,7 @@ final Color disabledColor = Colors.grey.withOpacity(.8);
 
 ThemeData cookingThemeData = ThemeData(
   primaryColor: primaryColor,
-  backgroundColor: Colors.red,
+  backgroundColor: primarySwatch[50],
   disabledColor: disabledColor,
   errorColor: dangerColor,
   primarySwatch: primarySwatch,
