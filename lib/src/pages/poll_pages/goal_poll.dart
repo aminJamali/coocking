@@ -1,10 +1,10 @@
-import 'package:cooking/utils/constants.dart';
-import 'package:cooking/utils/dimens.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+
+import '../../infrastructures/utils/constants.dart';
+import '../../infrastructures/utils/dimens.dart';
 
 class GoalPoll extends StatelessWidget {
   const GoalPoll({final Key? key}) : super(key: key);
