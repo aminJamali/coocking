@@ -3,8 +3,8 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
-import '../../infrastructures/utils/constants.dart';
 import '../../infrastructures/utils/dimens.dart';
+import '../../infrastructures/utils/utils.dart';
 
 class GoalPoll extends StatelessWidget {
   const GoalPoll({final Key? key}) : super(key: key);
@@ -21,9 +21,9 @@ class GoalPoll extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _question(),
-          Constants.normalVerticalSpacer,
+          Utils.smallVerticalSpace,
           _items(),
-          Constants.normalVerticalSpacer,
+          Utils.smallVerticalSpace,
           _notKnowItem(),
         ],
       );
