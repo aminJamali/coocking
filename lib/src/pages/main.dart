@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../infrastructures/routes/pages.dart';
 import '../infrastructures/styles/cooking_theme_data.dart';
-import 'login/login_page.dart';
+import 'login/views/login_page.dart';
 
 void main() {
   runApp(const MyApp());

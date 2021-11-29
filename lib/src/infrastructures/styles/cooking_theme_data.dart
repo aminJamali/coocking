@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color(0xFF43056A);
 const MaterialColor primarySwatch = MaterialColor(0xFF43056A, {
-  50: Color(0xFFE7EBF6),
-  100: Color(0xFFFAB5FF),
-  200: Color(0xFFCA88F1),
-  300: Color(0xFF9C5DC2),
-  400: Color(0xFF6F3395),
+  50: Color(0xFFE8E1ED),
+  100: Color(0xFFC7B4D2),
+  200: Color(0xFFA182B5),
+  300: Color(0xFF7B5097),
+  400: Color(0xFF5F2B80),
   500: Color(0xFF43056A),
-  600: Color(0xFF330352),
-  700: Color(0xFF200134),
-  800: Color(0xFF200048),
-  900: Color(0xFF1A0041),
+  600: Color(0xFF3D0462),
+  700: Color(0xFF340457),
+  800: Color(0xFF2C034D),
+  900: Color(0xFF1E013C),
 });
 
 final Color successColor = Colors.green.shade500;
@@ -21,10 +20,12 @@ final Color dangerColor = Colors.red.withOpacity(.8);
 final Color disabledColor = Colors.grey.withOpacity(.8);
 
 ThemeData cookingThemeData = ThemeData(
-  primaryColor: primaryColor,
+  primarySwatch: primarySwatch,
   backgroundColor: primarySwatch[50],
   disabledColor: disabledColor,
   errorColor: dangerColor,
-  primarySwatch: primarySwatch,
   fontFamily: 'IRANSans',
+  //dialogBackgroundColor: primarySwatch[100],
+  scaffoldBackgroundColor: primarySwatch[50],
 );
+
