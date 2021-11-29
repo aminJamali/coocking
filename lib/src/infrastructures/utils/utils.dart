@@ -49,6 +49,11 @@ class Utils {
         baseOffset: 0,
         extentOffset: _controller.value.text.length,
       );
-
+  static String? validateText(final String text) {
+    if (text.isEmpty) {
+      return 'این فیلد نباید خالی باشد';
+    }
+    return null;
+  }
 
 }
