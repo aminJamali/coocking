@@ -1,3 +1,4 @@
+import 'package:cooking/src/infrastructures/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 const MaterialColor primarySwatch = MaterialColor(0xFF43056A, {
@@ -20,12 +21,17 @@ final Color dangerColor = Colors.red.withOpacity(.8);
 final Color disabledColor = Colors.grey.withOpacity(.8);
 
 ThemeData cookingThemeData = ThemeData(
+  primaryColor: primarySwatch,
   primarySwatch: primarySwatch,
   backgroundColor: primarySwatch[50],
   disabledColor: disabledColor,
   errorColor: dangerColor,
   fontFamily: 'IRANSans',
-  //dialogBackgroundColor: primarySwatch[100],
   scaffoldBackgroundColor: primarySwatch[50],
+  iconTheme: const IconThemeData(color: primarySwatch),
+  buttonTheme: const ButtonThemeData(
+    padding: Utils.middlePadding,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(Utils.middleSpace))),
+  ),
 );
-
