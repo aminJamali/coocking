@@ -15,7 +15,6 @@ class AdminPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-        backgroundColor: context.theme.backgroundColor,
         body: _body(),
       );
 
@@ -63,9 +62,12 @@ class AdminPage extends StatelessWidget {
     required final void Function() onTaped,
     required final IconData icon,
     required final String title,
-  }) =>
-      ElevatedButton(
+  }) => ElevatedButton(
         onPressed: onTaped,
+    style: ElevatedButton.styleFrom(
+      primary: Colors.amberAccent[700],
+      onPrimary: Colors.white,
+    ),
         child: Padding(
           padding: Utils.middlePadding,
           child: Column(

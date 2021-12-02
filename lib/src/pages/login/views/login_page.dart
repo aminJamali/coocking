@@ -8,8 +8,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-
-        backgroundColor: context.theme.backgroundColor,
         body: Center(
           child: ElevatedButton(
             onPressed: () => Get.toNamed(Routes.adminPage),

@@ -13,30 +13,38 @@ class RawMaterialListItem extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(final BuildContext context) => ListTile(
-    dense: true,
-    tileColor: Colors.white,
-    leading: const Icon(Icons.restaurant_outlined,),
-        title: Text(rawMaterialViewModel.title),
-        subtitle: Row(
-          children: [
-            Text(rawMaterialViewModel.count),
-            Utils.smallHorizontalSpace,
-            Text(rawMaterialViewModel.unit),
-          ],
-        ),
-        trailing: SizedBox(
-          width: context.width*0.3,
-          child: Row(
+  Widget build(final BuildContext context) => Padding(
+        padding: Utils.middlePadding,
+        child: ListTile(
+          dense: true,
+          tileColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(Utils.middleSpace))),
+          leading: Icon(
+            Icons.restaurant_rounded,
+            color: Get.theme.colorScheme.primary,
+          ),
+          title: Text(rawMaterialViewModel.title),
+          subtitle: Row(
+            children: [
+              Text(rawMaterialViewModel.count),
+              Utils.smallHorizontalSpace,
+              Text(rawMaterialViewModel.unit),
+            ],
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.edit_outlined),
-                iconSize: 20,
+                icon: Icon(
+                  Icons.edit_outlined,
+                  color: Get.theme.colorScheme.primary,
+                ),
               ),
               IconButton(
                 onPressed: () {},
-                iconSize: 20,
                 icon: Icon(
                   Icons.delete_outlined,
                   color: Get.theme.errorColor,

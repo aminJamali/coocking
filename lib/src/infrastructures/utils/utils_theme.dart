@@ -17,11 +17,11 @@ class UtilsTheme {
         filled: true,
         errorStyle: errorTextStyle(),
         focusedBorder: UtilsTheme.setOutlineBorder(
-            color: Get.theme.primaryColor, width: 2.0),
+            color:Get.theme.colorScheme.primary, width: 2.0),
         errorBorder: setOutlineBorder(color: Get.theme.errorColor, width: 2.0),
-        fillColor: Get.theme.primaryColor.withOpacity(0.1),
+        fillColor: Get.theme.colorScheme.background,
         enabledBorder: UtilsTheme.setOutlineBorder(
-            color: Get.theme.primaryColor, width: 1.0),
+            color: Get.theme.colorScheme.primary, width: 1.0),
       );
 
   static TextStyle errorTextStyle() => TextStyle(color: Get.theme.errorColor);
