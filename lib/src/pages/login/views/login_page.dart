@@ -10,7 +10,7 @@ class LoginPage extends StatelessWidget {
   Widget build(final BuildContext context) => Scaffold(
         body: Center(
           child: ElevatedButton(
-            onPressed: () => Get.toNamed(Routes.adminPage),
+            onPressed: () => Get.toNamed(Routes.drawerPage),
             child: const Text('ورود به صفحه مدیریت'),
           ),
         ),

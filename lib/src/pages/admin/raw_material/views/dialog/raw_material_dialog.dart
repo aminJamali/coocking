@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cooking/src/pages/shared/input_field_area.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,13 +40,23 @@ class RawMaterialDialog extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Utils.middleVerticalSpace,
-                  TextFormField(
-                      validator: (final text) => Utils.validateText(text ?? ''),
-                      initialValue: '',
-                      decoration: UtilsTheme.textFormFieldDecoration(
-                          hint: 'مثال: شکر', label: 'عنوان'),
-                      onSaved: (final value) =>
-                          controller.titleSaved(value ?? '')),
+                  InputFieldArea(
+                    onChanged: (final onChanged) {},
+                    hint: 'مثال : شکر',
+                    icon: Icons.food_bank,
+                    lable: 'عنوان',
+                    controller: controller.rawMaterial,
+                    maxLength: 20,
+                    validator: (final validator) {},
+                    textInputType: TextInputType.text,
+                  ),
+                  // TextFormField(
+                  //     validator: (final text) => Utils.validateText(text ?? ''),
+                  //     initialValue: '',
+                  //     decoration: UtilsTheme.textFormFieldDecoration(
+                  //         hint: 'مثال: شکر', label: 'عنوان'),
+                  //     onSaved: (final value) =>
+                  //         controller.titleSaved(value ?? '')),
                   Utils.middleVerticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
