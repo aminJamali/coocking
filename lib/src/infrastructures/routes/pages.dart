@@ -1,3 +1,4 @@
+import 'package:cooking/src/pages/shared/drawer.dart';
 import 'package:get/get.dart';
 
 import '../../pages/admin/main/views/admin_page.dart';
@@ -22,5 +23,9 @@ final pages = [
   GetPage(
     name: Routes.registerRawMaterialPage,
     page: () => const ModifyRawMaterial(),
+  ),
+  GetPage(
+    name: Routes.drawerPage,
+    page: () => DrawerScreen(),
   ),
 ];

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../../infrastructures/utils/utils.dart';
 
-
 class AdminPage extends StatelessWidget {
   const AdminPage({final Key? key}) : super(key: key);
   static const TextStyle _headerTextStyle = TextStyle(
@@ -31,7 +30,7 @@ class AdminPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _headerButtonBuilder(
-                          onTaped: () =>Get.toNamed(Routes.rawMaterialPage),
+                          onTaped: () => Get.toNamed(Routes.rawMaterialPage),
                           title: 'مواد اولیه',
                           icon: Icons.category_outlined),
                     ),
@@ -62,12 +61,13 @@ class AdminPage extends StatelessWidget {
     required final void Function() onTaped,
     required final IconData icon,
     required final String title,
-  }) => ElevatedButton(
+  }) =>
+      ElevatedButton(
         onPressed: onTaped,
-    style: ElevatedButton.styleFrom(
-      primary: Colors.amberAccent[700],
-      onPrimary: Colors.white,
-    ),
+        style: ElevatedButton.styleFrom(
+          primary: Colors.amberAccent[700],
+          onPrimary: Colors.white,
+        ),
         child: Padding(
           padding: Utils.middlePadding,
           child: Column(
