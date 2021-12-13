@@ -1,14 +1,15 @@
 import 'package:cooking/src/infrastructures/utils/utils.dart';
-import 'package:cooking/src/pages/admin/raw_material/models/raw_material_view_model.dart';
+import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_register_controller.dart';
+import 'package:cooking/src/pages/admin/ingredients/models/ingredients_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../shared/empty_page.dart';
-import 'dialog/raw_material_dialog.dart';
-import 'widgets/raw_material_list_item.dart';
+import '../../../shared/views/empty_page.dart';
+import 'dialog/modify_ingredients_dialog.dart';
+import 'widgets/ingredients_list_item.dart';
 
-class RawMaterialPage extends StatelessWidget {
-  const RawMaterialPage({final Key? key}) : super(key: key);
+class IngredientsPage extends StatelessWidget {
+  const IngredientsPage({final Key? key}) : super(key: key);
 
   @override
   @override
@@ -23,9 +24,9 @@ class RawMaterialPage extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: Utils.maxWith),
-            child: RawMaterialListItem(
-              rawMaterialViewModel: RawMaterialViewModel(
-                  id: '', unit: 'گرم', count: '10', title: 'گوجه فرنگی'),
+            child: IngredientsListItem(
+              ingredientsViewModel: IngredientsViewModel(
+                  title: 'گوجه فرنگی', ingredientUnitTitle: 'گرم'),
             ),
           ),
         ),
@@ -35,9 +36,11 @@ class RawMaterialPage extends StatelessWidget {
       );
 
   Widget _addButton() => FloatingActionButton(
-        onPressed: () {
-          Get.dialog(RawMaterialDialog(), barrierColor: Colors.white10);
-        },
+        onPressed: _onAddTaped,
         child: const Icon(Icons.add),
+      );
+
+  Future<dynamic> _onAddTaped() => Utils.showDialog(
+        page: ModifyIngredientsDialog(() => IngredientsRegisterController()),
       );
 }

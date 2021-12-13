@@ -1,0 +1,1 @@
+enum PickImage { camera, gallery }

@@ -35,19 +35,30 @@ ThemeData cookingThemeData = ThemeData(
   disabledColor: disabledColor,
   scaffoldBackgroundColor: backgroundColor,
   fontFamily: 'IRANSans',
-floatingActionButtonTheme:FloatingActionButtonThemeData(
-  backgroundColor: secondaryColor,
-  splashColor: Colors.white,
-  foregroundColor: Colors.white,
-) ,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: secondaryColor,
+    splashColor: Colors.white,
+    foregroundColor: Colors.white,
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       primary: secondaryColor,
       onPrimary: Colors.white,
     ),
   ),
-  buttonTheme:  ButtonThemeData(
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: ButtonStyle(
+        side: MaterialStateProperty.all(
+      BorderSide(
+        style: BorderStyle.solid,
+        color: secondaryColor,
+        width: 2.0,
+      ),
+    )),
+  ),
+  buttonTheme: ButtonThemeData(
     buttonColor: secondaryColor,
+    textTheme: ButtonTextTheme.accent,
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(Utils.middleSpace))),
   ),

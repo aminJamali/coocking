@@ -1,14 +1,16 @@
+import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_edit_controller.dart';
+import 'package:cooking/src/pages/admin/ingredients/views/dialog/modify_ingredients_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../infrastructures/utils/utils.dart';
-import '../../models/raw_material_view_model.dart';
+import '../../models/ingredients_view_model.dart';
 
-class RawMaterialListItem extends StatelessWidget {
-  final RawMaterialViewModel rawMaterialViewModel;
+class IngredientsListItem extends StatelessWidget {
+  final IngredientsViewModel ingredientsViewModel;
 
-  const RawMaterialListItem({
-    required final this.rawMaterialViewModel,
+  const IngredientsListItem({
+    required final this.ingredientsViewModel,
     final Key? key,
   }) : super(key: key);
 
@@ -25,19 +27,19 @@ class RawMaterialListItem extends StatelessWidget {
             Icons.restaurant_rounded,
             color: Get.theme.colorScheme.primary,
           ),
-          title: Text(rawMaterialViewModel.title),
+          title: Text(ingredientsViewModel.title),
           subtitle: Row(
             children: [
-              Text(rawMaterialViewModel.count),
+              Text(ingredientsViewModel.title),
               Utils.smallHorizontalSpace,
-              Text(rawMaterialViewModel.unit),
+              Text(ingredientsViewModel.ingredientUnitTitle ?? '-'),
             ],
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: _editTaped,
                 icon: Icon(
                   Icons.edit_outlined,
                   color: Get.theme.colorScheme.primary,
@@ -53,5 +55,9 @@ class RawMaterialListItem extends StatelessWidget {
             ],
           ),
         ),
+      );
+
+  Future<dynamic> _editTaped() => Utils.showDialog(
+        page: ModifyIngredientsDialog(() => IngredientsEditController()),
       );
 }

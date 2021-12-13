@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Utils {
   int value = 0;
@@ -33,27 +34,25 @@ class Utils {
     width: Utils.largeSpace,
   );
 
-
   static const middlePadding = EdgeInsetsDirectional.all(middleSpace);
   static const smallPadding = EdgeInsetsDirectional.all(smallSpace);
   static const tinyPadding = EdgeInsetsDirectional.all(tinySpace);
   static const largePadding = EdgeInsetsDirectional.all(largeSpace);
   static const massivePadding = EdgeInsetsDirectional.all(massiveSpace);
 
-
-
-
+ static Future<dynamic> showDialog({required final Widget page}) =>
+      Get.dialog(page, barrierColor: Colors.white10);
 
   static void textSelection(final TextEditingController _controller) =>
       _controller.selection = TextSelection(
         baseOffset: 0,
         extentOffset: _controller.value.text.length,
       );
-  static String? validateText(final String text) {
-    if (text.isEmpty) {
+
+  static String? validateText(final String? text) {
+    if (text?.isEmpty?? true) {
       return 'این فیلد نباید خالی باشد';
     }
     return null;
   }
-
 }

@@ -1,10 +1,9 @@
-import 'package:cooking/src/pages/shared/drawer.dart';
 import 'package:get/get.dart';
 
+import '../../pages/admin/ingredients/views/ingredients_page.dart';
 import '../../pages/admin/main/views/admin_page.dart';
-import '../../pages/admin/raw_material/views/raw_material_page.dart';
-import '../../pages/admin/raw_material/views/widgets/modify_raw_material.dart';
 import '../../pages/login/views/login_page.dart';
+import '../../pages/shared/views/drawer.dart';
 import 'routes.dart';
 
 final pages = [
@@ -17,15 +16,11 @@ final pages = [
     page: () => const AdminPage(),
   ),
   GetPage(
-    name: Routes.rawMaterialPage,
-    page: () => const RawMaterialPage(),
-  ),
-  GetPage(
-    name: Routes.registerRawMaterialPage,
-    page: () => const ModifyRawMaterial(),
+    name: Routes.ingredientsPage,
+    page: () => const IngredientsPage(),
   ),
   GetPage(
     name: Routes.drawerPage,
-    page: () => DrawerScreen(),
+    page: () => const DrawerScreen(),
   ),
 ];

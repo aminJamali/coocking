@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../infrastructures/utils/utils.dart';
+import '../../../infrastructures/utils/utils.dart';
 
 class EmptyPage extends StatelessWidget {
   final String title;

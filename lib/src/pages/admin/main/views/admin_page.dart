@@ -30,7 +30,7 @@ class AdminPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _headerButtonBuilder(
-                          onTaped: () => Get.toNamed(Routes.rawMaterialPage),
+                          onTaped: () => Get.toNamed(Routes.ingredientsPage),
                           title: 'مواد اولیه',
                           icon: Icons.category_outlined),
                     ),
@@ -64,10 +64,6 @@ class AdminPage extends StatelessWidget {
   }) =>
       ElevatedButton(
         onPressed: onTaped,
-        style: ElevatedButton.styleFrom(
-          primary: Colors.amberAccent[700],
-          onPrimary: Colors.white,
-        ),
         child: Padding(
           padding: Utils.middlePadding,
           child: Column(

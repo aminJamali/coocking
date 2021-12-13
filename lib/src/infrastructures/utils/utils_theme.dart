@@ -7,8 +7,8 @@ class UtilsTheme {
   int ignoreError = 0;
 
   static InputDecoration textFormFieldDecoration({
-    required final String hint,
     required final String label,
+    final String? hint,
   }) =>
       InputDecoration(
         hintText: hint,
@@ -33,4 +33,5 @@ class UtilsTheme {
         borderRadius: BorderRadius.circular(Utils.middleSpace),
         borderSide: BorderSide(width: width, color: color),
       );
+
 }

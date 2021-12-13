@@ -1,9 +1,12 @@
-import 'package:cooking/src/pages/admin/main/views/admin_page.dart';
-import 'package:cooking/src/pages/shared/menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 
+import '../../admin/main/views/admin_page.dart';
+import 'menu_widget.dart';
+
 class DrawerScreen extends StatefulWidget {
+  const DrawerScreen({final Key? key}) : super(key: key);
+
   @override
   DrawerScreenState createState() => DrawerScreenState();
 }
@@ -19,22 +22,21 @@ class DrawerScreenState extends State<DrawerScreen> {
 
   @override
   void initState() {
-    title = "صفحه اصلی";
+    title = 'صفحه اصلی';
     super.initState();
   }
 
   @override
-  Widget build(final BuildContext context) {
-    return Scaffold(
+  Widget build(final BuildContext context) => Scaffold(
       body: SliderMenuContainer(
           drawerIconColor: Colors.white,
-          appBarColor: Colors.blue,
+          appBarColor:Theme.of(context).colorScheme.primary,
           hasAppBar: true,
           slideDirection: SlideDirection.RIGHT_TO_LEFT,
           key: drawerKey,
           sliderMenuOpenSize: 200,
           title: Text(
-            this.title!,
+            title!,
             style: const TextStyle(
                 fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
           ),
@@ -46,8 +48,8 @@ class DrawerScreenState extends State<DrawerScreen> {
 
                 setState(() {
                   if (key == 'home') {
-                    chanePage('home');
-                    this.title = 'صفحه اصلی';
+                    changePage('home');
+                    title = 'صفحه اصلی';
                   }
                 });
               },
@@ -58,10 +60,8 @@ class DrawerScreenState extends State<DrawerScreen> {
             child: navChildren[currentPage]!,
           )),
     );
-  }
 
-  // ignore: prefer_final_parameters
-  void chanePage(String activePage) {
+  void changePage(final String activePage) {
     setState(() {
       currentPage = activePage;
     });
