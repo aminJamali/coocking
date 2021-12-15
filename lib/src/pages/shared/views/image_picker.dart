@@ -38,7 +38,10 @@ class _ImagePickersState extends State<ImagePickers> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('انتخاب عکس',style: TextStyle(color: Colors.grey),),
+            const Text(
+              'انتخاب عکس',
+              style: TextStyle(color: Colors.grey),
+            ),
             _cancelImageButton(),
           ],
         ),
@@ -57,36 +60,50 @@ class _ImagePickersState extends State<ImagePickers> {
   }
 
   Widget _cameraButton() => TextButton.icon(
-    icon: const Icon(Icons.camera_outlined,size: 30,),
-      label:  const Text('دوربین',style: TextStyle(fontSize: 20),),
-      onPressed: () => _pickImage(PickImage.camera),
-  );
-  Widget _cancelImageButton() => IconButton(
-    onPressed: Get.back,
-    icon: const Icon(Icons.close_outlined),
-  );
+        icon: const Icon(
+          Icons.camera_outlined,
+          size: 30,
+        ),
+        label: const Text(
+          'دوربین',
+          style: TextStyle(fontSize: 20),
+        ),
+        onPressed: () => _pickImage(PickImage.camera),
+      );
 
-  Widget _galleryButton() =>  TextButton.icon(
-    icon: const Icon(Icons.collections_outlined,size: 30,),
-    label:  const Text('گالری',style: TextStyle(fontSize: 20),),
-    onPressed: () => _pickImage(PickImage.gallery),
-  );
+  Widget _cancelImageButton() => IconButton(
+        onPressed: Get.back,
+        icon: const Icon(Icons.close_outlined),
+      );
+
+  Widget _galleryButton() => TextButton.icon(
+        icon: const Icon(
+          Icons.collections_outlined,
+          size: 30,
+        ),
+        label: const Text(
+          'گالری',
+          style: TextStyle(fontSize: 20),
+        ),
+        onPressed: () => _pickImage(PickImage.gallery),
+      );
+
   Widget _photoBox() => Container(
         width: 100,
         height: 100,
         margin: const EdgeInsets.symmetric(vertical: 5.0),
-        padding: const EdgeInsets.all(1.0),
         decoration: BoxDecoration(
           color: Get.theme.colorScheme.background,
           borderRadius: BorderRadius.circular(Utils.middleSpace),
           border: Border.all(
-            width: 1,
+            width: 2,
             color: Get.theme.colorScheme.primary,
           ),
         ),
         child: _byte != null
             ? Image.memory(
                 _byte!,
+                fit: BoxFit.cover,
               )
             : const Center(
                 child: Icon(
@@ -94,8 +111,6 @@ class _ImagePickersState extends State<ImagePickers> {
                 color: Colors.black26,
               )),
       );
-
-
 
   Widget _addPhotoIcon() => Positioned(
         bottom: -2,
