@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../../infrastructures/utils/utils.dart';
 import '../../../../../infrastructures/utils/utils_theme.dart';
 import '../../../../shared/views/dialogs/blur_dialog.dart';
+import '../../../../shared/views/fill_button.dart';
 import '../../../../shared/views/getx_view.dart';
 import '../../../../shared/views/image_picker.dart';
 import '../../controllers/ingredients_modify_controller.dart';
@@ -35,22 +36,27 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
                   Utils.largeVerticalSpace,
                   const ImagePickers(),
                   Padding(
-                    padding:Utils.largePadding,
+                    padding: Utils.largePadding,
                     child: _title(),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: Utils.largeSpace),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Utils.largeSpace),
                     child: _units(),
                   ),
                   Utils.largeVerticalSpace,
-                  ElevatedButton(
-                      onPressed: controller.submitTaped,
-                      child: const Text('ذخیـره',))
+                  _submitButton(),
                 ],
               ),
             ),
           ),
         ),
+      );
+
+  Widget _submitButton() => FillButton(
+        title: 'ذخیـره',
+        onPressed: controller.submitTaped,
+        loading: controller.loadingSubmit.value,
       );
 
   DropdownButtonFormField<String> _units() => DropdownButtonFormField<String>(
@@ -70,7 +76,6 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
           .toList());
 
   Widget _title() => TextFormField(
-
       validator: Utils.validateText,
       initialValue: controller.ingredientsViewModel?.title,
       decoration:
@@ -78,13 +83,13 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
       onSaved: (final value) => controller.titleSaved(value!));
 
   List<Widget> _header() => [
-    Utils.largeVerticalSpace,
+        Utils.largeVerticalSpace,
         Icon(
           Icons.app_registration_outlined,
           color: Get.theme.colorScheme.primary,
           size: 45,
         ),
-    Utils.middleVerticalSpace,
+        Utils.middleVerticalSpace,
         _headerTitle(),
       ];
 

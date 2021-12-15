@@ -6,6 +6,7 @@ abstract class IngredientsModifyController extends GetxController {
   GlobalKey<FormState> modifyMaterialFormKey = GlobalKey<FormState>();
   TextEditingController rawMaterial = TextEditingController();
   IngredientsViewModel? ingredientsViewModel;
+  RxBool loadingSubmit=false.obs;
 
   void submitTaped();
 
