@@ -6,7 +6,6 @@ abstract class IngredientsModifyController extends GetxController {
   GlobalKey<FormState> modifyMaterialFormKey = GlobalKey<FormState>();
   TextEditingController rawMaterial = TextEditingController();
   IngredientsViewModel? ingredientsViewModel;
-  late String submitLabel;
 
   void submitTaped();
 

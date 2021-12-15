@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 
 import '../utils/utils.dart';
 
-// const MaterialColor primarySwatch = MaterialColor(0xFF5BC8AC, {
-//   50: Color(0xFFEBF8F5),
-//   100: Color(0xFFCEEFE6),
-//   200: Color(0xFFADE4D6),
-//   300: Color(0xFF8CD9C5),
-//   400: Color(0xFF74D0B8),
-//   500: Color(0xFF5BC8AC),
-//   600: Color(0xFF53C2A5),
-//   700: Color(0xFF49BB9B),
-//   800: Color(0xFF40B492),
-//   900: Color(0xFF2FA782),
-// });
-const MaterialColor primarySwatch = Colors.purple;
+const MaterialColor primarySwatch = MaterialColor( 0xFF8C6C14, {
+  50: Color(0xFFF1EDE3),
+  100: Color(0xFFDDD3B9),
+  200: Color(0xFFC6B68A),
+  300: Color(0xFFAF985B),
+  400: Color(0xFF9D8237),
+  500: Color( 0xFF8C6C14),
+  600: Color(0xFF846412),
+  700: Color(0xFF79590E),
+  800: Color(0xFF6F4F0B),
+  900: Color(0xFF5C3D06),
+});
+//const MaterialColor primarySwatch = Colors.purple;
 
-final Color secondaryColor = Colors.amberAccent[700]!;
+const Color secondaryColor =Color(0xFF158f46);
 final Color successColor = Colors.green.shade500;
 const Color infoColor = Colors.teal;
-final Color backgroundColor = primarySwatch[50]!;
+final Color backgroundColor = primarySwatch[100]!;
 const Color warningColor = Color(0xFFffc107);
 final Color dangerColor = Colors.red.withOpacity(.8);
 final Color disabledColor = Colors.grey.withOpacity(.8);
@@ -35,7 +35,10 @@ ThemeData cookingThemeData = ThemeData(
   disabledColor: disabledColor,
   scaffoldBackgroundColor: backgroundColor,
   fontFamily: 'IRANSans',
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
+  textTheme:const TextTheme(
+    button: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+  ) ,
+  floatingActionButtonTheme:   const FloatingActionButtonThemeData(
     backgroundColor: secondaryColor,
     splashColor: Colors.white,
     foregroundColor: Colors.white,
@@ -49,17 +52,17 @@ ThemeData cookingThemeData = ThemeData(
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
         side: MaterialStateProperty.all(
-      BorderSide(
+       const BorderSide(
         style: BorderStyle.solid,
         color: secondaryColor,
         width: 2.0,
       ),
     )),
   ),
-  buttonTheme: ButtonThemeData(
+  buttonTheme:  const ButtonThemeData(
     buttonColor: secondaryColor,
     textTheme: ButtonTextTheme.accent,
-    shape: const RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(Utils.middleSpace))),
   ),
 );

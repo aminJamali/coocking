@@ -1,8 +1,6 @@
 import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_modify_controller.dart';
 
 class IngredientsEditController extends IngredientsModifyController{
- @override
-  String get submitLabel => 'ویرایش';
 
   @override
   void submitTaped() {

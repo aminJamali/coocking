@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../infrastructures/utils/utils.dart';
 import '../models/pick_image_enum.dart';
 
 class ImagePickers extends StatefulWidget {
@@ -77,6 +78,7 @@ class _ImagePickersState extends State<ImagePickers> {
         padding: const EdgeInsets.all(1.0),
         decoration: BoxDecoration(
           color: Get.theme.colorScheme.background,
+          borderRadius: BorderRadius.circular(Utils.middleSpace),
           border: Border.all(
             width: 1,
             color: Get.theme.colorScheme.primary,
@@ -97,11 +99,20 @@ class _ImagePickersState extends State<ImagePickers> {
 
   Widget _addPhotoIcon() => Positioned(
         bottom: -2,
-        right: -10,
-        child: Icon(
-          Icons.add_a_photo,
-          size: 25,
-          color: Get.theme.colorScheme.primary,
+        right: -15,
+        child: Card(
+          color: Colors.white.withOpacity(0.8),
+          elevation: Utils.middleSpace,
+          clipBehavior: Clip.antiAlias,
+          shape: const CircleBorder(),
+          child: Padding(
+            padding: Utils.smallPadding,
+            child: Icon(
+              Icons.add_a_photo,
+              size: 25,
+              color: Get.theme.colorScheme.primary,
+            ),
+          ),
         ),
       );
 

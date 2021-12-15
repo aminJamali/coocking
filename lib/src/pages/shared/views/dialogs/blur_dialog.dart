@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../../../infrastructures/utils/utils.dart';
+import '../../../../infrastructures/utils/utils.dart';
 
 class BlurDialog extends StatelessWidget {
   final Widget dialogChild;
