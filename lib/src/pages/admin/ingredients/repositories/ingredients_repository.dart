@@ -14,7 +14,7 @@ class IngredientsRepository {
   Future<Either<String, IngredientsListViewModel>> getAllIngredients(
       {final String? query}) async {
     final String _url = UrlRepository.getAllIngredientsUrl();
-    final Either<String, dynamic> response = await _httpClient!.get(_url);
+    final Either<String, dynamic> response = await _httpClient!.get(_url,);
     return response.fold(
       (final exception) => Left(exception),
       (final data) => Right(IngredientsListViewModel.fromJson(data)),

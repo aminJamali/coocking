@@ -1,3 +1,4 @@
+import 'package:cooking/src/infrastructures/commons/parameters.dart';
 import 'package:cooking/src/infrastructures/routes/routes.dart';
 import 'package:cooking/src/pages/login/models/login_dto.dart';
 import 'package:cooking/src/pages/login/repositories/login_repository.dart';
@@ -6,7 +7,7 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final LoginRepository _loginRepository = LoginRepository();
-  LoginDto loginDto = LoginDto(username: '2280113732', password: '123456');
+  LoginDto loginDto = LoginDto(username: '2301064506', password: '123456');
   RxBool loginLoading = false.obs;
 
   Future<void> login() async {
@@ -17,8 +18,8 @@ class LoginController extends GetxController {
       (final exception) => loginLoading.value = false,
       (final result) {
         loginLoading.value = false;
-        
-        //Get.toNamed(Routes.drawerPage);
+        Parameters.token=result;
+        Get.toNamed(Routes.drawerPage);
       },
     );
   }

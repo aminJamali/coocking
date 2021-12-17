@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cooking/src/infrastructures/commons/parameters.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -21,7 +22,7 @@ class HttpClient {
       connectTimeout: 10000,
       receiveTimeout: 10000,
       sendTimeout: 10000,
-      //headers:
+      headers:{'authorization':'Bearer ${Parameters.token}'}
     );
 
     _dio = Dio(options);
@@ -195,8 +196,11 @@ class HttpClient {
     print(dioError.requestOptions.path);
     print(dioError.requestOptions.data);
     print('${dioError.response!.statusCode} ${dioError.response!.statusMessage}');
-    print('"error": ${dioError.response!.data['error']}');
-    print('"description": ${dioError.response!.data['description']}');
+    if (dioError.response!.statusCode==500){
+      print('"error": ${dioError.response!.data['error']}');
+      print('"description": ${dioError.response!.data['description']}');
+    }
+
     final String exception = _getErrorKey(dioError);
     if (!disableHandleException) {
       handleExceptionCallBack.call(exception);
