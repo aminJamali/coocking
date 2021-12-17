@@ -1,4 +1,5 @@
 import 'package:cooking/src/infrastructures/utils/utils.dart';
+import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_controller.dart';
 import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_register_controller.dart';
 import 'package:cooking/src/pages/admin/ingredients/models/ingredients_view_model.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ import 'dialog/modify_ingredients_dialog.dart';
 import 'widgets/ingredients_list_item.dart';
 
 class IngredientsPage extends StatelessWidget {
-  const IngredientsPage({final Key? key}) : super(key: key);
+  final controller= Get.put(IngredientsController());
+   IngredientsPage({final Key? key}) : super(key: key);
 
   @override
   @override
