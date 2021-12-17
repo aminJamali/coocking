@@ -17,7 +17,7 @@ final pages = [
   ),
   GetPage(
     name: Routes.ingredientsPage,
-    page: () => const IngredientsPage(),
+    page: () => IngredientsPage(),
   ),
   GetPage(
     name: Routes.drawerPage,

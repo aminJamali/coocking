@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import '../commons/http_client.dart';
+import '../commons/parameters.dart';
+
 class Utils {
-  int value = 0;
   static const double tinySpace = 2;
   static const double smallSpace = 4;
   static const double middleSpace = 8;
@@ -40,7 +43,7 @@ class Utils {
   static const largePadding = EdgeInsetsDirectional.all(largeSpace);
   static const massivePadding = EdgeInsetsDirectional.all(massiveSpace);
 
- static Future<dynamic> showDialog({required final Widget page}) =>
+  static Future<dynamic> showDialog({required final Widget page}) =>
       Get.dialog(page, barrierColor: Colors.white10);
 
   static void textSelection(final TextEditingController _controller) =>
@@ -50,9 +53,21 @@ class Utils {
       );
 
   static String? validateText(final String? text) {
-    if (text?.isEmpty?? true) {
+    if (text?.isEmpty ?? true) {
       return 'این فیلد نباید خالی باشد';
     }
     return null;
   }
+
+  static HttpClient http() {
+    final HttpClient _httpclient = HttpClient(
+      baseUrl: Parameters.fullUrl,
+      handleExceptionCallBack: handleException,
+    );
+    return _httpclient;
+  }
+
+  static void handleException(final String exceptionKey) =>
+      Fluttertoast.showToast(
+          msg: exceptionKey, backgroundColor: Get.theme.colorScheme.error);
 }
