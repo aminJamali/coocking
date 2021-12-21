@@ -1,13 +1,11 @@
-import 'package:cooking/src/infrastructures/utils/utils.dart';
-import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_controller.dart';
-import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_register_controller.dart';
-import 'package:cooking/src/pages/admin/ingredients/models/ingredients_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../shared/views/empty_page.dart';
+import '../../../../infrastructures/utils/utils.dart';
+import '../controllers/ingredients_controller.dart';
+import '../controllers/ingredients_register_controller.dart';
 import 'dialog/modify_ingredients_dialog.dart';
-import 'widgets/ingredients_list_item.dart';
+import 'widgets/ingredients_list.dart';
 
 class IngredientsPage extends StatelessWidget {
   final controller= Get.put(IngredientsController());
@@ -26,15 +24,9 @@ class IngredientsPage extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: Utils.maxWith),
-            child: IngredientsListItem(
-              ingredientsViewModel: IngredientsViewModel(
-                  title: 'گوجه فرنگی', ingredientUnitTitle: 'گرم'),
-            ),
+            child: const IngredientsList(),
           ),
         ),
-        // body: const EmptyPage(
-        //       title: 'تاکنون مواد اولیه ای ثبت نشده است.',
-        //     ),
       );
 
   Widget _addButton() => FloatingActionButton(

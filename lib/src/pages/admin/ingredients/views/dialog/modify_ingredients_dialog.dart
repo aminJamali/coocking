@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cooking/src/pages/admin/ingredients/models/ingredient_units_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -59,21 +60,22 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
         loading: controller.loadingSubmit.value,
       );
 
-  DropdownButtonFormField<String> _units() => DropdownButtonFormField<String>(
+  Widget _units() => DropdownButtonFormField<IngredientUnitsViewModel>(
       decoration: UtilsTheme.textFormFieldDecoration(label: 'واحد'),
       // dropdownColor:
       //     Get.theme.primaryColor,
       isExpanded: false,
       isDense: true,
-      onSaved: (final value) => controller.unitSaved(value!),
+    //  onSaved: (final value) => controller.unitSaved(value!),
       onChanged: (final value) {},
-      validator: Utils.validateText,
+      //validator: Utils.validateText,
       items: controller.unitItems
           .map((final items) => DropdownMenuItem(
                 value: items,
-                child: Text(items),
+                child: Text(items.title),
               ))
-          .toList());
+          .toList()
+  );
 
   Widget _title() => TextFormField(
       validator: Utils.validateText,

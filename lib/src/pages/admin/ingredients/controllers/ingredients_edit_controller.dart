@@ -13,7 +13,7 @@ class IngredientsEditController extends IngredientsModifyController{
   }
 
   @override
-  void unitSaved(final String unit) {
+  void unitSaved(final int unitId) {
     // TODO: implement unitSaved
   }
 }
