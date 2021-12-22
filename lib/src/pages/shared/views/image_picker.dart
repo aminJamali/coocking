@@ -150,7 +150,7 @@ class _ImagePickersState extends State<ImagePickers> {
     }
 
     if (pickedFile != null) {
-      controller.uploadDocument(fileDetails: pickedFile).then((final _) {
+      await controller.uploadDocument(fileDetails: pickedFile).then((final _) {
         setState(() {
           pickedFile!.readAsBytes().then((final value) => _byte = value);
         });
