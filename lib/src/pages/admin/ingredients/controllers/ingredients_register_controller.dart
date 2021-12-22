@@ -3,6 +3,12 @@ import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_modi
 class IngredientsRegisterController extends IngredientsModifyController{
 
   @override
+  void onInit() {
+    getUnits();
+    super.onInit();
+  }
+
+  @override
   void submitTaped() {
     // TODO: implement submitTaped
   }
@@ -13,7 +19,7 @@ class IngredientsRegisterController extends IngredientsModifyController{
   }
 
   @override
-  void unitSaved(final String unit) {
+  void unitSaved(final int unitId) {
     // TODO: implement unitSaved
   }
 }

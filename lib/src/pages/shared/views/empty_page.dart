@@ -22,13 +22,14 @@ class EmptyPage extends StatelessWidget {
             Text(
               title,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 20),
+              style:  TextStyle(fontSize: 20,color: Theme.of(context).colorScheme.primary),
             ),
             Utils.middleVerticalSpace,
             Image.asset(
               'lib/assets/images/dish.png',
               width: 80,
               height: 80,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ],
         ),
