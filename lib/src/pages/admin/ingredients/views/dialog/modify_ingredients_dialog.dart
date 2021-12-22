@@ -34,7 +34,9 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
                   Utils.smallVerticalSpace,
                   ..._header(),
                   Utils.largeVerticalSpace,
-                  const ImagePickers(),
+                   ImagePickers(
+                    onPickFile: onImageSelected,
+                  ),
                   Padding(
                     padding: Utils.largePadding,
                     child: _title(),
@@ -93,11 +95,15 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
         _headerTitle(),
       ];
 
-  Text _headerTitle() => Text(
+  Widget _headerTitle() => Text(
         'تعریف مواد اولیه',
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Theme.of(Get.context!).colorScheme.primary),
       );
+
+  void onImageSelected(final String avatarId){
+    print('doc:$avatarId');
+  }
 }

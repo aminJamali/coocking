@@ -6,16 +6,25 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../infrastructures/utils/utils.dart';
+import '../controllers/upload_document_controller.dart';
 import '../models/pick_image_enum.dart';
 
 class ImagePickers extends StatefulWidget {
-  const ImagePickers({final Key? key}) : super(key: key);
+  final String? avatarId;
+  final void Function(String)? onPickFile;
+
+  const ImagePickers({
+    final this.onPickFile,
+    final this.avatarId,
+    final Key? key,
+  }) : super(key: key);
 
   @override
   _ImagePickersState createState() => _ImagePickersState();
 }
 
 class _ImagePickersState extends State<ImagePickers> {
+  final controller = Get.put(UploadDocumentController());
   Uint8List? _byte;
   final ImagePicker _picker = ImagePicker();
 
@@ -140,11 +149,14 @@ class _ImagePickersState extends State<ImagePickers> {
       pickedFile = await _imgFromGallery();
     }
 
-    setState(() {
-      if (pickedFile != null) {
-        pickedFile.readAsBytes().then((final value) => _byte = value);
-      }
-    });
+    if (pickedFile != null) {
+      controller.uploadDocument(fileDetails: pickedFile).then((final _) {
+        setState(() {
+          pickedFile!.readAsBytes().then((final value) => _byte = value);
+        });
+        widget.onPickFile?.call(controller.documentId!);
+      });
+    }
   }
 
   Future<XFile?> _imgFromGallery() async =>

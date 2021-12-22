@@ -1,8 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide FormData,MultipartFile;
+import 'package:image_picker/image_picker.dart';
 
-import '../commons/http_client.dart';
+import '../commons/advance_http_client.dart';
 import '../commons/parameters.dart';
 
 class Utils {
@@ -36,7 +38,7 @@ class Utils {
   static const largeHorizontalSpace = SizedBox(
     width: Utils.largeSpace,
   );
-
+  static const double middleUserImageSize = 50.0;
   static const middlePadding = EdgeInsetsDirectional.all(middleSpace);
   static const smallPadding = EdgeInsetsDirectional.all(smallSpace);
   static const tinyPadding = EdgeInsetsDirectional.all(tinySpace);
@@ -59,8 +61,8 @@ class Utils {
     return null;
   }
 
-  static HttpClient http() {
-    final HttpClient _httpclient = HttpClient(
+  static AdvanceHttpClient http() {
+    final AdvanceHttpClient _httpclient = AdvanceHttpClient(
       baseUrl: Parameters.fullUrl,
       handleExceptionCallBack: handleException,
     );
@@ -70,4 +72,15 @@ class Utils {
   static void handleException(final String exceptionKey) =>
       Fluttertoast.showToast(
           msg: exceptionKey, backgroundColor: Get.theme.colorScheme.error);
+
+  static Future<FormData> convertToByte(
+      final XFile fileDetails,
+      ) async {
+    final MultipartFile multipartFile = MultipartFile.fromBytes(
+      await fileDetails.readAsBytes(),
+      filename: fileDetails.name,
+    );
+    final formData = FormData.fromMap({'file': multipartFile});
+    return formData;
+  }
 }

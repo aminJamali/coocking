@@ -1,17 +1,18 @@
 import 'dart:async';
 
-import 'package:cooking/src/infrastructures/commons/parameters.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class HttpClient {
+import 'parameters.dart';
+
+class AdvanceHttpClient {
   final String baseUrl;
   final String? exceptionPrefix;
   Dio? _dio;
   final void Function(String exceptionKey) handleExceptionCallBack;
   final bool disableGeneralInterceptor;
 
-  HttpClient({
+  AdvanceHttpClient({
     required final this.baseUrl,
     required final this.handleExceptionCallBack,
    final this.disableGeneralInterceptor = false,
