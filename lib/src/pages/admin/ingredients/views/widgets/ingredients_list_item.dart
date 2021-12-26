@@ -28,8 +28,7 @@ class IngredientsListItem extends StatelessWidget {
           title: Text(ingredientsViewModel.title),
           subtitle: Row(
             children: [
-              Text(ingredientsViewModel.title),
-              Utils.smallHorizontalSpace,
+              const Text('واحد: '),
               Text(ingredientsViewModel.ingredientUnitTitle ?? '-'),
             ],
           ),
@@ -56,6 +55,6 @@ class IngredientsListItem extends StatelessWidget {
       );
 
   Future<dynamic> _editTaped() => Utils.showDialog(
-        page: ModifyIngredientsDialog(() => IngredientsEditController()),
+        page: ModifyIngredientsDialog(() => IngredientsEditController(ingredientsViewModel)),
       );
 }

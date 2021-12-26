@@ -1,7 +1,8 @@
+import 'package:cooking/src/infrastructures/styles/cooking_theme_data.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart' hide FormData,MultipartFile;
+import 'package:get/get.dart' hide FormData, MultipartFile;
 import 'package:image_picker/image_picker.dart';
 
 import '../commons/advance_http_client.dart';
@@ -45,8 +46,16 @@ class Utils {
   static const largePadding = EdgeInsetsDirectional.all(largeSpace);
   static const massivePadding = EdgeInsetsDirectional.all(massiveSpace);
 
-  static Future<dynamic> showDialog({required final Widget page}) =>
-      Get.dialog(page, barrierColor: Colors.white10);
+  static Future<dynamic> showDialog({
+    required final Widget page,
+    final Future<void>? Function(dynamic)? thenValue,
+  }) {
+    if (thenValue != null) {
+      return Get.dialog(page, barrierColor: Colors.white10).then(thenValue);
+    } else {
+      return Get.dialog(page, barrierColor: Colors.white10);
+    }
+  }
 
   static void textSelection(final TextEditingController _controller) =>
       _controller.selection = TextSelection(
@@ -73,9 +82,12 @@ class Utils {
       Fluttertoast.showToast(
           msg: exceptionKey, backgroundColor: Get.theme.colorScheme.error);
 
+  static void successToast({required final String message}) =>
+      Fluttertoast.showToast(msg: message, backgroundColor: successColor);
+
   static Future<FormData> convertToByte(
-      final XFile fileDetails,
-      ) async {
+    final XFile fileDetails,
+  ) async {
     final MultipartFile multipartFile = MultipartFile.fromBytes(
       await fileDetails.readAsBytes(),
       filename: fileDetails.name,

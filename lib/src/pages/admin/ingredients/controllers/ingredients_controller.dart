@@ -30,7 +30,6 @@ class IngredientsController extends GetxController {
   }
   Future<void> getAllIngredients() async {
     paginationList.hasMoreData.value = true;
-    paginationList.paginationOffset++;
     final Either<String, IngredientsListViewModel> response =
         await _ingredientsRepository.getAllIngredients(
             query: paginationList.query);
@@ -39,10 +38,11 @@ class IngredientsController extends GetxController {
         paginationList.hasMoreData.value = false;
       },
       (final result) {
-        if (result.elements!.isEmpty) {
+       // if (result.elements!.isEmpty) {
           paginationList.hasMoreData.value = false;
-        }
+        //}
         paginationList.key.currentState!.addAll(result.elements!);
+        paginationList.paginationOffset++;
       },
     );
   }

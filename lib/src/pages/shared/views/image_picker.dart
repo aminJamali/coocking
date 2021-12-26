@@ -1,13 +1,14 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../infrastructures/commons/parameters.dart';
 import '../../../infrastructures/utils/utils.dart';
 import '../controllers/upload_document_controller.dart';
 import '../models/pick_image_enum.dart';
+import 'advance_network_image.dart';
 
 class ImagePickers extends StatefulWidget {
   final String? avatarId;
@@ -25,8 +26,14 @@ class ImagePickers extends StatefulWidget {
 
 class _ImagePickersState extends State<ImagePickers> {
   final controller = Get.put(UploadDocumentController());
-  Uint8List? _byte;
   final ImagePicker _picker = ImagePicker();
+  String? _avatarId;
+
+  @override
+  void initState() {
+    _avatarId = widget.avatarId;
+    super.initState();
+  }
 
   @override
   Widget build(final BuildContext context) => _imageForm();
@@ -36,7 +43,13 @@ class _ImagePickersState extends State<ImagePickers> {
           onTap: _showImageDialog,
           child: Stack(
             clipBehavior: Clip.none,
-            children: [_photoBox(), _addPhotoIcon()],
+            children: [
+              AdvanceNetworkImage(
+                imageSize: 100,
+                documentId: _avatarId,
+              ),
+              _addPhotoIcon()
+            ],
           ),
         ),
       );
@@ -97,28 +110,10 @@ class _ImagePickersState extends State<ImagePickers> {
         onPressed: () => _pickImage(PickImage.gallery),
       );
 
-  Widget _photoBox() => Container(
-        width: 100,
-        height: 100,
-        margin: const EdgeInsets.symmetric(vertical: 5.0),
-        decoration: BoxDecoration(
-          color: Get.theme.colorScheme.background,
-          borderRadius: BorderRadius.circular(Utils.middleSpace),
-          border: Border.all(
-            width: 2,
-            color: Get.theme.colorScheme.primary,
-          ),
-        ),
-        child: _byte != null
-            ? Image.memory(
-                _byte!,
-                fit: BoxFit.cover,
-              )
-            : const Center(
-                child: Icon(
-                Icons.image_outlined,
-                color: Colors.black26,
-              )),
+  Widget _image() => Image.network(
+        '${Parameters.fullUrl}/documents/$_avatarId',
+        headers: {'authorization': 'Bearer ${Parameters.token}'},
+        fit: BoxFit.fill,
       );
 
   Widget _addPhotoIcon() => Positioned(
@@ -152,7 +147,7 @@ class _ImagePickersState extends State<ImagePickers> {
     if (pickedFile != null) {
       await controller.uploadDocument(fileDetails: pickedFile).then((final _) {
         setState(() {
-          pickedFile!.readAsBytes().then((final value) => _byte = value);
+          _avatarId = controller.documentId;
         });
         widget.onPickFile?.call(controller.documentId!);
       });

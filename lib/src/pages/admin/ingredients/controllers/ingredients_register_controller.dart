@@ -1,7 +1,10 @@
-import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_modify_controller.dart';
+import 'package:dartz/dartz.dart';
+import 'package:get/get.dart';
 
-class IngredientsRegisterController extends IngredientsModifyController{
+import '../../../../infrastructures/utils/utils.dart';
+import 'ingredients_modify_controller.dart';
 
+class IngredientsRegisterController extends IngredientsModifyController {
   @override
   void onInit() {
     getUnits();
@@ -10,16 +13,21 @@ class IngredientsRegisterController extends IngredientsModifyController{
 
   @override
   void submitTaped() {
-    // TODO: implement submitTaped
+    if (modifyMaterialFormKey.currentState!.validate()) {
+      modifyMaterialFormKey.currentState!.save();
+      registerIngredient();
+    }
   }
 
-  @override
-  void titleSaved(final String title) {
-    // TODO: implement titleSaved
-  }
-
-  @override
-  void unitSaved(final int unitId) {
-    // TODO: implement unitSaved
+  Future<void> registerIngredient() async {
+    loadingSubmit.value = true;
+    final Either<String, String> result = await modifyIngredientsRepository
+        .setIngredient(ingredientsDto: ingredientsDto);
+    result.fold((final exception) => loadingSubmit.value = false,
+        (final result) {
+      loadingSubmit.value = false;
+      Get.back(result: true);
+      Utils.successToast(message: 'مواد اولیه با موفقیت ثبت گردید');
+    });
   }
 }

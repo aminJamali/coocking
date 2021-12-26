@@ -31,6 +31,7 @@ ThemeData cookingThemeData = ThemeData(
     backgroundColor: backgroundColor,
     primaryColorDark: primarySwatch[700],
     errorColor: dangerColor,
+
   ),
   disabledColor: disabledColor,
   scaffoldBackgroundColor: backgroundColor,

@@ -35,8 +35,9 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
                   Utils.smallVerticalSpace,
                   ..._header(),
                   Utils.largeVerticalSpace,
-                   ImagePickers(
+                  ImagePickers(
                     onPickFile: onImageSelected,
+                    avatarId: controller.ingredientsViewModel?.avatarId,
                   ),
                   Padding(
                     padding: Utils.largePadding,
@@ -56,35 +57,36 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
         ),
       );
 
-  Widget _submitButton() => FillButton(
+  Widget _submitButton() => Obx(() => FillButton(
         title: 'ذخیـره',
         onPressed: controller.submitTaped,
         loading: controller.loadingSubmit.value,
-      );
+      ));
 
-  Widget _units() => DropdownButtonFormField<IngredientUnitsViewModel>(
-      decoration: UtilsTheme.textFormFieldDecoration(label: 'واحد'),
-      // dropdownColor:
-      //     Get.theme.primaryColor,
-      isExpanded: false,
-      isDense: true,
-    //  onSaved: (final value) => controller.unitSaved(value!),
-      onChanged: (final value) {},
-      //validator: Utils.validateText,
-      items: controller.unitItems
-          .map((final items) => DropdownMenuItem(
-                value: items,
-                child: Text(items.title),
-              ))
-          .toList()
-  );
+  Widget _units() => Obx(
+        () => controller.unitListLoading.value
+            ? const CircularProgressIndicator()
+            : DropdownButtonFormField<IngredientUnitsViewModel>(
+                value: controller.selectedUnit,
+                decoration: UtilsTheme.textFormFieldDecoration(label: 'واحد'),
+                onSaved: (final value) =>
+                    controller.ingredientsDto.ingredientUnitId = value!.id,
+                onChanged: (final value) => {},
+                validator: (final value) => Utils.validateText(value?.title),
+                items: controller.unitItems
+                    .map((final items) => DropdownMenuItem(
+                          value: items,
+                          child: Text(items.title),
+                        ))
+                    .toList()),
+      );
 
   Widget _title() => TextFormField(
       validator: Utils.validateText,
       initialValue: controller.ingredientsViewModel?.title,
       decoration:
           UtilsTheme.textFormFieldDecoration(hint: 'مثال: شکر', label: 'عنوان'),
-      onSaved: (final value) => controller.titleSaved(value!));
+      onSaved: (final value) => controller.ingredientsDto.title = value!);
 
   List<Widget> _header() => [
         Utils.largeVerticalSpace,
@@ -105,7 +107,8 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
             color: Theme.of(Get.context!).colorScheme.primary),
       );
 
-  void onImageSelected(final String avatarId){
-    print('doc:$avatarId');
+  void onImageSelected(final String avatarId) {
+    controller.ingredientsDto.avatarId = avatarId;
+    controller.ingredientsDto.extension = 'jpg';
   }
 }

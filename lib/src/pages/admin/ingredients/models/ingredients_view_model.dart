@@ -1,6 +1,5 @@
 class IngredientsViewModel {
   int? id;
-  int? ingredientUnitId;
   String? ingredientUnitTitle;
   String title;
   String? avatarId;
@@ -9,7 +8,6 @@ class IngredientsViewModel {
   IngredientsViewModel({
    required final this.title,
    final this.id,
-   final this.ingredientUnitId,
    final this.ingredientUnitTitle,
    final this.avatarId,
    final this.extension,
@@ -19,7 +17,6 @@ class IngredientsViewModel {
       IngredientsViewModel(
         id: json['id'],
         title: json['title'],
-        ingredientUnitId: json['ingredientUnitId'],
         ingredientUnitTitle: json['ingredientUnitTitle'],
         avatarId: json['avatarId'],
         extension: json['extension'],

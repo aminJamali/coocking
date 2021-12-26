@@ -23,7 +23,7 @@ class ModifyIngredientsRepository {
     );
   }
 
-  Future<Either<String, int>> setIngredient(
+  Future<Either<String, String>> setIngredient(
       {required final IngredientsDto ingredientsDto}) async {
     final String _url = UrlRepository.ingredientsUrl;
     final Either<String, dynamic> response =

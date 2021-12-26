@@ -8,8 +8,9 @@ import 'dialog/modify_ingredients_dialog.dart';
 import 'widgets/ingredients_list.dart';
 
 class IngredientsPage extends StatelessWidget {
-  final controller= Get.put(IngredientsController());
-   IngredientsPage({final Key? key}) : super(key: key);
+  final controller = Get.put(IngredientsController());
+
+  IngredientsPage({final Key? key}) : super(key: key);
 
   @override
   @override
@@ -35,6 +36,13 @@ class IngredientsPage extends StatelessWidget {
       );
 
   Future<dynamic> _onAddTaped() => Utils.showDialog(
-        page: ModifyIngredientsDialog(() => IngredientsRegisterController()),
+        thenValue: (final result) {
+          if (result) {
+            return controller.resetAndGetIngredients();
+          }
+        },
+        page: ModifyIngredientsDialog(
+          () => IngredientsRegisterController(),
+        ),
       );
 }

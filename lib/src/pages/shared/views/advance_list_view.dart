@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
@@ -32,7 +33,8 @@ class AdvanceListView<T> extends StatefulWidget {
 class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
    int animationDuration = 400;
   final GlobalKey<AnimatedListState> listKey = GlobalKey();
-  bool _isLoading = false;
+   final ScrollController _scrollController=ScrollController();
+   bool _isLoading = false;
   bool get _hasMoreData => widget.hasMoreData;
   bool get _isLoadingData => _isLoading;
   bool get _isEmpty => !widget.hasMoreData && widget.items.isEmpty;
@@ -162,8 +164,8 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
     //       widget.scrollController == null) {
     //     oldWidget.scrollController?.removeListener(_scrollListener);
     //   }
-    //   _effectiveScrollController.addListener(_scrollListener);
-    // }
+      _effectiveScrollController.addListener(_scrollListener);
+   // }
     WidgetsBinding.instance!.addPostFrameCallback((final _) {
       if (widget.items.isNotEmpty) {
         _checkLoadMoreData();
@@ -200,7 +202,7 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
   void dispose() {
     _debouncer.cancel();
     _effectiveScrollController.removeListener(_scrollListener);
-    // _scrollController?.dispose();
+     _scrollController.dispose();
     super.dispose();
   }
   @override
