@@ -26,6 +26,7 @@ class IngredientsRegisterController extends IngredientsModifyController {
     result.fold((final exception) => loadingSubmit.value = false,
         (final result) {
       loadingSubmit.value = false;
+      //IngredientsViewModel=ingredientsDto.convertToViewModel(id: id, unitTitle: unitTitle)
       Get.back(result: true);
       Utils.successToast(message: 'مواد اولیه با موفقیت ثبت گردید');
     });

@@ -44,6 +44,7 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
       Debouncer(delay: const Duration(milliseconds: 500));
   bool _isLoading = false;
   bool _canRefresh = true;
+  int _lastItemRemovedTimeLine = -1;
 
   bool get _hasMoreData => widget.hasMoreData;
 
@@ -273,4 +274,60 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
     }
     widget.items.clear();
   }
+
+  T? removeItem(final T item) => removeItemAt(widget.items.indexOf(item));
+
+  T? removeItemAt(final int index) {
+    if (DateTime.now().millisecondsSinceEpoch - _lastItemRemovedTimeLine <
+        604) {
+      return null;
+    }
+    if (_isOutOfRange(index)) {
+      return null;
+    }
+    _lastItemRemovedTimeLine = DateTime.now().millisecondsSinceEpoch;
+    final T removedItem = widget.items.removeAt(index);
+    if (removedItem != null) {
+      listKey.currentState!.removeItem(
+        index,
+            (final context, final animation) => _axisWidget(
+          children: [
+            FadeTransition(
+              opacity: animation,
+              child: SizeTransition(
+                sizeFactor: animation,
+                axisAlignment: 0.0,
+                child: widget.itemBuilder(
+                  context,
+                  removedItem,
+                  index,
+                ),
+              ),
+            ),
+          ],
+        ),
+        duration:  Duration(milliseconds: animationDuration),
+      );
+      Future.delayed(
+         Duration(milliseconds: animationDuration),
+            () => setState(() {}),
+      );
+    }
+    return removedItem;
+  }
+  void operator []=(final int index, final T item) {
+    if (_isOutOfRange(index)) {
+      return;
+    }
+    setState(() {
+      widget.items[index] = item;
+    });
+  }
+
+  bool _isOutOfRange(final int index) =>
+      index < 0 || index > widget.items.length - 1;
+
+  T operator [](final int index) => widget.items[index];
+
+  List<T> get items => widget.items;
 }

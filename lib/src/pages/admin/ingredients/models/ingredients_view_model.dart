@@ -1,3 +1,5 @@
+import 'ingredients_dto.dart';
+
 class IngredientsViewModel {
   int? id;
   String? ingredientUnitTitle;
@@ -21,4 +23,11 @@ class IngredientsViewModel {
         avatarId: json['avatarId'],
         extension: json['extension'],
       );
+
+  IngredientsDto convertToDto(final int unitId)=>IngredientsDto(
+    title: title,
+    ingredientUnitId: unitId,
+    extension: extension,
+    avatarId: avatarId,
+  );
 }

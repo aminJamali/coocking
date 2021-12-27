@@ -41,4 +41,12 @@ abstract class IngredientsModifyController extends GetxController {
     );
     return result;
   }
+
+  void onUnitSelected(final IngredientUnitsViewModel? unit){
+    if(unit==null){
+      return;
+    }
+    selectedUnit=unit;
+    ingredientsDto.ingredientUnitId=unit.id;
+  }
 }

@@ -34,7 +34,7 @@ class ModifyIngredientsRepository {
     );
   }
 
-  Future<Either<String, int>> editIngredient(
+  Future<Either<String, String>> editIngredient(
       {required final IngredientsDto ingredientsDto,
         required final int ingredientId}) async {
     final String _url =

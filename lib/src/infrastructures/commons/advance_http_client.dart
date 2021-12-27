@@ -196,11 +196,14 @@ class AdvanceHttpClient {
       final DioError dioError, final bool disableHandleException) {
     print(dioError.requestOptions.path);
     print(dioError.requestOptions.data);
-    print('${dioError.response!.statusCode} ${dioError.response!.statusMessage}');
-    if (dioError.response!.statusCode==500){
-      print('"error": ${dioError.response!.data['error']}');
-      print('"description": ${dioError.response!.data['description']}');
+    if (dioError.type==DioErrorType.response){
+      print('${dioError.response!.statusCode} ${dioError.response!.statusMessage}');
+      if (dioError.response!.statusCode==500){
+        print('"error": ${dioError.response!.data['error']}');
+        print('"description": ${dioError.response!.data['description']}');
+      }
     }
+
 
     final String exception = _getErrorKey(dioError);
     if (!disableHandleException) {

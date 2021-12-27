@@ -1,16 +1,15 @@
-import 'dart:ui';
-
-import 'package:cooking/src/pages/admin/ingredients/models/ingredient_units_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../infrastructures/utils/utils.dart';
 import '../../../../../infrastructures/utils/utils_theme.dart';
+import '../../../../shared/views/dialog_header.dart';
 import '../../../../shared/views/dialogs/blur_dialog.dart';
 import '../../../../shared/views/fill_button.dart';
 import '../../../../shared/views/getx_view.dart';
 import '../../../../shared/views/image_picker.dart';
 import '../../controllers/ingredients_modify_controller.dart';
+import '../../models/ingredient_units_view_model.dart';
 
 class ModifyIngredientsDialog<T extends IngredientsModifyController>
     extends GetxView<T> {
@@ -33,7 +32,7 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
               child: Column(
                 children: [
                   Utils.smallVerticalSpace,
-                  ..._header(),
+                  _header(),
                   Utils.largeVerticalSpace,
                   ImagePickers(
                     onPickFile: onImageSelected,
@@ -69,8 +68,7 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
             : DropdownButtonFormField<IngredientUnitsViewModel>(
                 value: controller.selectedUnit,
                 decoration: UtilsTheme.textFormFieldDecoration(label: 'واحد'),
-                onSaved: (final value) =>
-                    controller.ingredientsDto.ingredientUnitId = value!.id,
+                onSaved:controller.onUnitSelected,
                 onChanged: (final value) => {},
                 validator: (final value) => Utils.validateText(value?.title),
                 items: controller.unitItems
@@ -88,24 +86,12 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
           UtilsTheme.textFormFieldDecoration(hint: 'مثال: شکر', label: 'عنوان'),
       onSaved: (final value) => controller.ingredientsDto.title = value!);
 
-  List<Widget> _header() => [
-        Utils.largeVerticalSpace,
-        Icon(
-          Icons.app_registration_outlined,
-          color: Get.theme.colorScheme.primary,
-          size: 45,
-        ),
-        Utils.middleVerticalSpace,
-        _headerTitle(),
-      ];
+  Widget _header()=>DialogHeader(
+    icon:  Icons.app_registration_outlined,
+    color: Get.theme.colorScheme.primary,
+    title: 'تعریف مواد اولیه',
+  );
 
-  Widget _headerTitle() => Text(
-        'تعریف مواد اولیه',
-        style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Theme.of(Get.context!).colorScheme.primary),
-      );
 
   void onImageSelected(final String avatarId) {
     controller.ingredientsDto.avatarId = avatarId;

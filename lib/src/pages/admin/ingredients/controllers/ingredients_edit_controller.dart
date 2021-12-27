@@ -1,3 +1,7 @@
+import 'package:cooking/src/infrastructures/utils/utils.dart';
+import 'package:dartz/dartz.dart';
+import 'package:get/get.dart';
+
 import '../models/ingredients_view_model.dart';
 import 'ingredients_modify_controller.dart';
 
@@ -12,6 +16,7 @@ class IngredientsEditController extends IngredientsModifyController {
     getUnits().then((final result) {
       if (result) {
         _setInitUnit();
+        ingredientsDto = initIngredientViewModel.convertToDto(selectedUnit!.id);
       }
     });
     super.onInit();
@@ -26,6 +31,30 @@ class IngredientsEditController extends IngredientsModifyController {
 
   @override
   void submitTaped() {
-    // TODO: implement submitTaped
+    if (modifyMaterialFormKey.currentState!.validate()) {
+      modifyMaterialFormKey.currentState!.save();
+      registerIngredient();
+    }
+  }
+
+  Future<void> registerIngredient() async {
+    loadingSubmit.value = true;
+    final Either<String, String> result =
+        await modifyIngredientsRepository.editIngredient(
+            ingredientsDto: ingredientsDto,
+            ingredientId: initIngredientViewModel.id!);
+    result.fold((final exception) => loadingSubmit.value = false,
+        (final result) {
+      loadingSubmit.value = false;
+      _onSuccess();
+    });
+  }
+
+  void _onSuccess() {
+    final IngredientsViewModel _finalIngredient =
+        ingredientsDto.convertToViewModel(
+            id: initIngredientViewModel.id!, unitTitle: selectedUnit!.title);
+    Get.back(result: _finalIngredient);
+    Utils.successToast(message: 'مواد اولیه با موفقیت ویرایش گردید');
   }
 }
