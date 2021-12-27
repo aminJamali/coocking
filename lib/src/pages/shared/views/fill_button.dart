@@ -7,12 +7,14 @@ class FillButton extends StatelessWidget {
   final String title;
   final bool loading;
   final void Function()? onPressed;
+  final ButtonStyle? style;
 
   const FillButton({
     required final this.title,
     final Key? key,
     final this.loading = false,
     final this.onPressed,
+    final this.style,
   }) : super(key: key);
 
   @override
@@ -20,10 +22,11 @@ class FillButton extends StatelessWidget {
       loading ? _disableButton() : _enableButton();
 
   Widget _enableButton() =>
-      ElevatedButton(onPressed: onPressed, child: _buttonText());
+      ElevatedButton(onPressed: onPressed,style:style , child: _buttonText(),);
 
   Widget _disableButton() => ElevatedButton(
       onPressed: null,
+      style:style,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

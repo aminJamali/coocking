@@ -17,7 +17,7 @@ class UtilsTheme {
         filled: true,
         errorStyle: errorTextStyle(),
         focusedBorder: UtilsTheme.setOutlineBorder(
-            color:Get.theme.colorScheme.primary, width: 2.0),
+            color: Get.theme.colorScheme.primary, width: 2.0),
         errorBorder: setOutlineBorder(color: Get.theme.errorColor, width: 2.0),
         fillColor: Get.theme.colorScheme.background,
         enabledBorder: UtilsTheme.setOutlineBorder(
@@ -27,11 +27,23 @@ class UtilsTheme {
   static TextStyle errorTextStyle() => TextStyle(color: Get.theme.errorColor);
 
   static OutlineInputBorder setOutlineBorder(
-          {required final Color color,
-          final double width = 1}) =>
+          {required final Color color, final double width = 1}) =>
       OutlineInputBorder(
         borderRadius: BorderRadius.circular(Utils.middleSpace),
         borderSide: BorderSide(width: width, color: color),
       );
 
+  static ButtonStyle errorOutlineButtonStyle() => ButtonStyle(
+          side: MaterialStateProperty.all(
+        BorderSide(
+          style: BorderStyle.solid,
+          color: Get.theme.colorScheme.error,
+          width: 2.0,
+        ),
+      ));
+
+  static ButtonStyle errorFillButtonStyle() => ElevatedButton.styleFrom(
+        primary: Get.theme.colorScheme.error,
+        onPrimary: Colors.white,
+      );
 }
