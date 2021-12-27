@@ -38,11 +38,11 @@ class IngredientsController extends GetxController {
         paginationList.hasMoreData.value = false;
       },
       (final result) {
-       // if (result.elements!.isEmpty) {
-          paginationList.hasMoreData.value = false;
-        //}
-        paginationList.key.currentState!.addAll(result.elements!);
         paginationList.paginationOffset++;
+       if (result.elements!.isEmpty) {
+          paginationList.hasMoreData.value = false;
+        }
+        paginationList.key.currentState!.addAll(result.elements!);
       },
     );
   }

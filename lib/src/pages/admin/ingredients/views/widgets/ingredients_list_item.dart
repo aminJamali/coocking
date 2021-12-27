@@ -18,43 +18,56 @@ class IngredientsListItem extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Padding(
         padding: Utils.middlePadding,
-        child: ListTile(
-          dense: true,
-          tileColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(Utils.middleSpace))),
-          leading: AdvanceNetworkImage(documentId: ingredientsViewModel.avatarId,),
-          title: Text(ingredientsViewModel.title),
-          subtitle: Row(
-            children: [
-              const Text('واحد: '),
-              Text(ingredientsViewModel.ingredientUnitTitle ?? '-'),
-            ],
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                onPressed: _editTaped,
-                icon: Icon(
-                  Icons.edit_outlined,
-                  color: Get.theme.colorScheme.primary,
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.delete_outlined,
-                  color: Get.theme.errorColor,
-                ),
-              ),
-            ],
-          ),
-        ),
+        // child: Container(
+        //     color: Colors.red,
+        //     child: Padding(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: Text(ingredientsViewModel.title),
+        //     )),
+         child: _ingredient(),
       );
 
+  Widget _ingredient() => ListTile(
+        tileColor: Colors.white,
+        shape: _border(),
+        leading: AdvanceNetworkImage(
+          documentId: ingredientsViewModel.avatarId,
+        ),
+       title: Text(ingredientsViewModel.title),
+        subtitle: Row(
+          children: [
+            const Text('واحد: '),
+            Text(ingredientsViewModel.ingredientUnitTitle ?? '-'),
+          ],
+        ),
+        trailing: _buttons(),
+      );
+
+  Widget _buttons() => Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            onPressed: _editTaped,
+            icon: Icon(
+              Icons.edit_outlined,
+              color: Get.theme.colorScheme.primary,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.delete_outlined,
+              color: Get.theme.errorColor,
+            ),
+          ),
+        ],
+      );
+
+  RoundedRectangleBorder _border() => const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(Utils.middleSpace)));
+
   Future<dynamic> _editTaped() => Utils.showDialog(
-        page: ModifyIngredientsDialog(() => IngredientsEditController(ingredientsViewModel)),
+        page: ModifyIngredientsDialog(
+            () => IngredientsEditController(ingredientsViewModel)),
       );
 }

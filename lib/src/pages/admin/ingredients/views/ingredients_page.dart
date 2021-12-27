@@ -13,21 +13,24 @@ class IngredientsPage extends StatelessWidget {
   IngredientsPage({final Key? key}) : super(key: key);
 
   @override
-  @override
   Widget build(final BuildContext context) => Scaffold(
         floatingActionButton: _addButton(),
-        appBar: AppBar(
-          title: const Text('مواد اولیه'),
-          centerTitle: true,
-          excludeHeaderSemantics: true,
+        appBar: _appBar(),
+        body: _body(),
+      );
+
+  Widget _body() => Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: Utils.maxWith),
+           child: const IngredientsList(),
         ),
-        body: Align(
-          alignment: Alignment.topCenter,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: Utils.maxWith),
-            child: const IngredientsList(),
-          ),
-        ),
+      );
+
+  AppBar _appBar() => AppBar(
+        title: const Text('مواد اولیه'),
+        centerTitle: true,
+        excludeHeaderSemantics: true,
       );
 
   Widget _addButton() => FloatingActionButton(

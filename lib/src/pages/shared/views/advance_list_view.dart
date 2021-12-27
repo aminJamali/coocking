@@ -10,11 +10,12 @@ class AdvanceListView<T> extends StatefulWidget {
   final Axis scrollDirection;
   final Future<void> Function()? onLoadMoreData;
   final Future<void> Function() onRefreshData;
-  final Widget Function(BuildContext, T,int) itemBuilder;
+  final Widget Function(BuildContext, T, int) itemBuilder;
   final bool hasMoreData;
   final bool shrinkWrap;
+  final ScrollController? scrollController;
 
-   const AdvanceListView({
+  const AdvanceListView({
     required final this.itemBuilder,
     required final this.onRefreshData,
     required final this.emptyPageTitle,
@@ -22,7 +23,8 @@ class AdvanceListView<T> extends StatefulWidget {
     final this.onLoadMoreData,
     final this.hasMoreData = false,
     final this.shrinkWrap = false,
-     final this.scrollDirection=Axis.vertical,
+    final this.scrollDirection = Axis.vertical,
+    final this.scrollController,
     final Key? key,
   }) : super(key: key);
 
@@ -31,51 +33,63 @@ class AdvanceListView<T> extends StatefulWidget {
 }
 
 class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
-   int animationDuration = 400;
+  int animationDuration = 400;
   final GlobalKey<AnimatedListState> listKey = GlobalKey();
-   final ScrollController _scrollController=ScrollController();
-   bool _isLoading = false;
-  bool get _hasMoreData => widget.hasMoreData;
-  bool get _isLoadingData => _isLoading;
-  bool get _isEmpty => !widget.hasMoreData && widget.items.isEmpty;
-  bool _canRefresh = true;
-  late VoidCallback _scrollListener;
-  final Debouncer _debouncer =
-  Debouncer(delay: const Duration(milliseconds: 500));
+  ScrollController? _scrollController;
 
-  ScrollController get _effectiveScrollController =>ScrollController();
+  ScrollController get _effectiveScrollController =>
+      widget.scrollController ?? (_scrollController ??= ScrollController());
+
+  final Debouncer _debouncer =
+      Debouncer(delay: const Duration(milliseconds: 500));
+  bool _isLoading = false;
+  bool _canRefresh = true;
+
+  bool get _hasMoreData => widget.hasMoreData;
+
+  bool get _isEmpty => !widget.hasMoreData && widget.items.isEmpty;
+
+  bool get _isLoadingData => _isLoading;
+
+  bool get _reachedLoadMoreOffset =>
+      _effectiveScrollController.position.extentAfter < 88;
+
+  late VoidCallback _scrollListener;
 
   @override
-  Widget build(final BuildContext context) =>
-      RefreshIndicator( onRefresh: _onRefresh, child: Stack(
+  Widget build(final BuildContext context) => RefreshIndicator(
+      onRefresh: _onRefresh,
+      child: Stack(
         children: [
           _listviewWidget,
-          if (_isEmpty) EmptyPage(title: widget.emptyPageTitle,),
+          if (_isEmpty)
+            EmptyPage(
+              title: widget.emptyPageTitle,
+            ),
         ],
       ));
 
   Widget get _listviewWidget {
-    final Widget result = AnimatedList(
-     key: listKey,
-     controller: _effectiveScrollController,
+    Widget result = AnimatedList(
+      key: listKey,
+      controller: _effectiveScrollController,
       scrollDirection: widget.scrollDirection,
-     //  padding: _padding,
-     //  physics: widget.physics,
-     //  reverse: widget.reverse,
-     //  primary: widget.primary,
+      physics: const AlwaysScrollableScrollPhysics(),
+      //  padding: _padding,
+      //  reverse: widget.reverse,
+      //  primary: widget.primary,
       initialItemCount: widget.items.length,
-      shrinkWrap: widget.shrinkWrap ,
+      shrinkWrap: widget.shrinkWrap,
       itemBuilder: _lisItemBuilder,
     );
-    // if (!widget.disableScrollbar) {
-    //   result = CupertinoScrollbar(
-    //     controller: _effectiveScrollController,
-    //     thickness: widget.scrollbarThickness,
-    //     radius: widget.scrollbarRadius,
-    //     isAlwaysShown: widget.scrollbarIsAlwaysShown,
-    //     child: result,
-    //   );
-    // }
+    result = CupertinoScrollbar(
+      controller: _effectiveScrollController,
+      thickness: 6.0,
+      radius: const Radius.circular(20),
+      isAlwaysShown: true,
+      child: result,
+    );
+
     return Stack(
       children: [
         result,
@@ -85,10 +99,10 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
   }
 
   Widget _lisItemBuilder(
-      final BuildContext context,
-      final int index,
-      final Animation<double> animation,
-      ) =>
+    final BuildContext context,
+    final int index,
+    final Animation<double> animation,
+  ) =>
       _axisWidget(
         children: [
           _itemContainer(
@@ -101,48 +115,47 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
         ],
       );
 
-  Widget get _loadingOrErrorWidget =>
-         _loadingWidget;
+  Widget get _loadingOrErrorWidget => _loadingWidget;
 
-  Widget get _loadingWidget =>
-          const Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 12),
-              child: CircularProgressIndicator(),
-            ),
-          );
+  Widget get _loadingWidget => const Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 12),
+          child: CircularProgressIndicator(),
+        ),
+      );
 
   Widget _axisWidget({required final List<Widget> children}) =>
-     widget.scrollDirection == Axis.vertical
-           ?
-    Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: children,
-      ) : Row(
-       mainAxisSize: MainAxisSize.min,
-       mainAxisAlignment: MainAxisAlignment.start,
-       crossAxisAlignment: CrossAxisAlignment.start,
-       children: children,
-     );
+      widget.scrollDirection == Axis.vertical
+          ? Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: children,
+            )
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: children,
+            );
 
   Widget _itemContainer(
-      final BuildContext context,
-      final int index,
-      final Animation<double> animation,
-      ) =>
+    final BuildContext context,
+    final int index,
+    final Animation<double> animation,
+  ) =>
       FadeTransition(
         opacity: animation,
         child: SizeTransition(
           sizeFactor: animation,
           child: widget.itemBuilder(
             context,
-             widget.items[index],
+            widget.items[index],
             index,
           ),
         ),
       );
+
   Future<void> _onRefresh() async {
     if (!_canRefresh) {
       return;
@@ -151,21 +164,23 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
     await widget.onRefreshData.call();
     _canRefresh = true;
   }
+
   Future<void> _callLoadMoreData() async {
     _isLoading = true;
     return widget.onLoadMoreData?.call().whenComplete(() {
       _isLoading = false;
     });
   }
+
   @override
   void didUpdateWidget(covariant final AdvanceListView<T> oldWidget) {
-    // if (oldWidget.scrollController != widget.scrollController) {
-    //   if (oldWidget.scrollController != null &&
-    //       widget.scrollController == null) {
-    //     oldWidget.scrollController?.removeListener(_scrollListener);
-    //   }
+    if (oldWidget.scrollController != widget.scrollController) {
+      if (oldWidget.scrollController != null &&
+          widget.scrollController == null) {
+        oldWidget.scrollController?.removeListener(_scrollListener);
+      }
       _effectiveScrollController.addListener(_scrollListener);
-   // }
+    }
     WidgetsBinding.instance!.addPostFrameCallback((final _) {
       if (widget.items.isNotEmpty) {
         _checkLoadMoreData();
@@ -174,6 +189,7 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
     });
     super.didUpdateWidget(oldWidget);
   }
+
   @override
   void didChangeDependencies() {
     WidgetsBinding.instance!.addPostFrameCallback((final _) {
@@ -181,30 +197,35 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
     });
     super.didChangeDependencies();
   }
+
   void _maybeTriggerScrollbar() {
     if (_effectiveScrollController.hasClients) {
       _effectiveScrollController.position.notifyListeners();
     }
   }
+
   @override
   void initState() {
     _scrollListener = () async {
       if (_hasMoreData &&
           !_isLoadingData &&
-          widget.items.isNotEmpty ) {
+          widget.items.isNotEmpty &&
+          _reachedLoadMoreOffset) {
         await _callLoadMoreData();
       }
     };
-     _effectiveScrollController.addListener(_scrollListener);
+    _effectiveScrollController.addListener(_scrollListener);
     super.initState();
   }
+
   @override
   void dispose() {
     _debouncer.cancel();
     _effectiveScrollController.removeListener(_scrollListener);
-     _scrollController.dispose();
+    _scrollController?.dispose();
     super.dispose();
   }
+
   @override
   void setState(final VoidCallback fn) {
     _checkLoadMoreData();
@@ -230,12 +251,12 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
   }
 
   void addItem(
-      final T item, {
-        final int? atIndex,
-        final bool withAnimation = true,
-      }) {
+    final T item, {
+    final int? atIndex,
+    final bool withAnimation = true,
+  }) {
     listKey.currentState!.insertItem(
-      atIndex??0,
+      atIndex ?? 0,
       duration: withAnimation
           ? Duration(milliseconds: animationDuration)
           : Duration.zero,
@@ -244,12 +265,12 @@ class AdvanceListViewState<T> extends State<AdvanceListView<T>> {
     widget.items.insert(atIndex ?? widget.items.length, item);
     setState(() {});
   }
-   void clearAllItems() {
-     for (var i = 0; i <= widget.items.length - 1; i++) {
-       listKey.currentState
-           !.removeItem(0, (final context, final animation) => const SizedBox());
-     }
-     widget.items.clear();
-   }
 
+  void clearAllItems() {
+    for (var i = 0; i <= widget.items.length - 1; i++) {
+      listKey.currentState!
+          .removeItem(0, (final context, final animation) => const SizedBox());
+    }
+    widget.items.clear();
+  }
 }
