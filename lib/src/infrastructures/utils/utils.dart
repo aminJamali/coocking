@@ -73,14 +73,14 @@ class Utils {
   static AdvanceHttpClient http() {
     final AdvanceHttpClient _httpclient = AdvanceHttpClient(
       baseUrl: Parameters.fullUrl,
-      handleExceptionCallBack: handleException,
+      handleExceptionCallBack:(final key)=> errorToast(message: key),
     );
     return _httpclient;
   }
 
-  static void handleException(final String exceptionKey) =>
+  static void errorToast({required final String message}) =>
       Fluttertoast.showToast(
-          msg: exceptionKey, backgroundColor: Get.theme.colorScheme.error);
+          msg: message, backgroundColor: Get.theme.colorScheme.error);
 
   static void successToast({required final String message}) =>
       Fluttertoast.showToast(msg: message, backgroundColor: successColor);

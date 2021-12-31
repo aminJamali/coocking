@@ -13,55 +13,72 @@ class IngredientsListItem extends StatelessWidget {
   const IngredientsListItem({
     required final this.ingredientsViewModel,
     final Key? key,
-   final this.onEditTaped,
-   final this.onDeleteTaped,
+    final this.onEditTaped,
+    final this.onDeleteTaped,
   }) : super(key: key);
 
   @override
-  Widget build(final BuildContext context) => Padding(
-        padding: Utils.middlePadding,
-        child: _ingredient(),
-      );
+  Widget build(final BuildContext context) => _ingredient();
 
-  Widget _ingredient() => ListTile(
-        tileColor: Colors.white,
+  Widget _ingredient() => Card(
+        color: Colors.white,
         shape: _border(),
-        leading: AdvanceNetworkImage(
-          documentId: ingredientsViewModel.avatarId,
+        margin: Utils.middlePadding,
+        elevation: Utils.smallSpace,
+        child: Padding(
+          padding: Utils.middlePadding,
+          child: _item(),
         ),
-        title: Text(ingredientsViewModel.title),
-        subtitle: Row(
-          children: [
-            const Text('واحد: '),
-            Text(ingredientsViewModel.ingredientUnitTitle ?? '-'),
-          ],
-        ),
-        trailing: _buttons(),
       );
 
-  Widget _buttons() => Row(
-        mainAxisSize: MainAxisSize.min,
+  Widget _item() => Row(
         children: [
+          AdvanceNetworkImage(
+            imageSize: 80,
+            documentId: ingredientsViewModel.avatarId,
+          ),
+          Utils.largeHorizontalSpace,
+          _details(),
+          const Spacer(),
           _edit(),
           _delete(),
         ],
       );
 
-  Widget _delete() => IconButton(
-          onPressed: onDeleteTaped,
-          icon: Icon(
-            Icons.delete_outlined,
-            color: Get.theme.errorColor,
+  Widget _details() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            ingredientsViewModel.title,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        );
+          Text(
+            'واحد: ${ingredientsViewModel.ingredientUnitTitle ?? '-'}',
+            style: TextStyle(color: Get.theme.disabledColor),
+          )
+        ],
+      );
+
+  Widget _delete() => IconButton(
+        onPressed: onDeleteTaped,
+        icon: Icon(
+          Icons.delete_outlined,
+          size: 30,
+          color: Get.theme.errorColor,
+        ),
+      );
 
   Widget _edit() => IconButton(
-          onPressed: onEditTaped,
-          icon: Icon(
-            Icons.edit_outlined,
-            color: Get.theme.colorScheme.primary,
-          ),
-        );
+        onPressed: onEditTaped,
+        icon: Icon(
+          Icons.edit_outlined,
+          size: 30,
+          color: Get.theme.colorScheme.primary,
+        ),
+      );
 
   RoundedRectangleBorder _border() => const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(Utils.middleSpace)));

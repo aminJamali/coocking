@@ -33,14 +33,15 @@ class UtilsTheme {
         borderSide: BorderSide(width: width, color: color),
       );
 
-  static ButtonStyle errorOutlineButtonStyle() => ButtonStyle(
-          side: MaterialStateProperty.all(
-        BorderSide(
-          style: BorderStyle.solid,
-          color: Get.theme.colorScheme.error,
-          width: 2.0,
-        ),
-      ));
+  static ButtonStyle errorOutlineButtonStyle() =>OutlinedButton.styleFrom(
+    primary: Colors.black,
+    side: BorderSide(
+      style: BorderStyle.solid,
+      color: Get.theme.colorScheme.error,
+      width: 2.0,
+    ),
+  )
+;
 
   static ButtonStyle errorFillButtonStyle() => ElevatedButton.styleFrom(
         primary: Get.theme.colorScheme.error,

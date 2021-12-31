@@ -32,8 +32,12 @@ class IngredientsEditController extends IngredientsModifyController {
   @override
   void submitTaped() {
     if (modifyMaterialFormKey.currentState!.validate()) {
+      if (ingredientsDto.avatarId != null) {
       modifyMaterialFormKey.currentState!.save();
       registerIngredient();
+      }else{
+        Utils.errorToast(message: 'انتخاب تصویر اجباری می باشد!');
+      }
     }
   }
 

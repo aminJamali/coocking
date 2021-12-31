@@ -51,7 +51,7 @@ class IngredientsList extends GetView<IngredientsController> {
         page: Obx(() => DeleteDialog(
               headerTitle: 'حذف ماده اولیه',
               loading: controller.deleteLoading.value,
-              bodyMessage: 'آیا مواد اولیه انتخابی حذف شود؟',
+              bodyMessage: 'آیا ماده اولیه انتخابی حذف شود؟',
               doneButtonTitle: 'حذف ماده اولیه',
               onDeleteTaped: () => controller.deleteIngredient(ingredientsId),
             )),

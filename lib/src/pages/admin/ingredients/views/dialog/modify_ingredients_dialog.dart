@@ -67,7 +67,7 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
             ? const CircularProgressIndicator()
             : DropdownButtonFormField<IngredientUnitsViewModel>(
                 value: controller.selectedUnit,
-                decoration: UtilsTheme.textFormFieldDecoration(label: 'واحد'),
+                decoration: UtilsTheme.textFormFieldDecoration(label: 'واحد*'),
                 onSaved:controller.onUnitSelected,
                 onChanged: (final value) => {},
                 validator: (final value) => Utils.validateText(value?.title),
@@ -83,7 +83,7 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
       validator: Utils.validateText,
       initialValue: controller.ingredientsViewModel?.title,
       decoration:
-          UtilsTheme.textFormFieldDecoration(hint: 'مثال: شکر', label: 'عنوان'),
+          UtilsTheme.textFormFieldDecoration(hint: 'مثال: شکر', label: 'عنوان*'),
       onSaved: (final value) => controller.ingredientsDto.title = value!);
 
   Widget _header()=>DialogHeader(

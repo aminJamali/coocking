@@ -37,6 +37,7 @@ ThemeData cookingThemeData = ThemeData(
   fontFamily: 'IRANSans',
   textTheme: const TextTheme(
     button: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+
   ),
   floatingActionButtonTheme: floatingActionButtonThemeData(),
   elevatedButtonTheme: elevatedButtonThemeData(),

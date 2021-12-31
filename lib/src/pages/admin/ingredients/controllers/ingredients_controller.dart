@@ -1,3 +1,4 @@
+import 'package:cooking/src/infrastructures/utils/utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
@@ -56,10 +57,10 @@ class IngredientsController extends GetxController {
           .addItem(ingredientsViewModel, atIndex: 0);
 
   void updateOnLocalList(
-          {required final IngredientsViewModel ingredientsViewModel}) =>
-      paginationList.key.currentState!.items
-          .map((oldIngredient) => oldIngredient = ingredientsViewModel)
-          .toList();
+          {required final IngredientsViewModel ingredientsViewModel}) {
+    removeOnLocalList(ingredientsId: ingredientsViewModel.id!);
+    addToLocalList(ingredientsViewModel: ingredientsViewModel);
+  }
 
   Future<void> deleteIngredient(final int ingredientsId) async {
     deleteLoading.value = true;
@@ -73,6 +74,7 @@ class IngredientsController extends GetxController {
         removeOnLocalList(ingredientsId: ingredientsId);
         deleteLoading.value = false;
         Get.back();
+        Utils.successToast(message: 'مواد اولیه با موفقیت حذف گردید');
       },
     );
   }

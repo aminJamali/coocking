@@ -43,7 +43,7 @@ class DeleteDialog extends StatelessWidget {
                   Text(
                     bodyMessage!,
                     style: const TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                   ),
                 Utils.largeVerticalSpace,
@@ -70,7 +70,7 @@ class DeleteDialog extends StatelessWidget {
             style: UtilsTheme.errorFillButtonStyle(),
           ),
           AdvanceOutlinedButton(
-            title: 'بازگشت',
+            title: '      بازگشت      ',
             onPressed: Get.back,
             style: UtilsTheme.errorOutlineButtonStyle(),
           ),
