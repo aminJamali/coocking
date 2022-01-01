@@ -9,17 +9,17 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final controller =Get.put(LoginController());
+    final controller = Get.put(LoginController());
     return Scaffold(
-        body: Center(
-          child: Obx(
-            () => FillButton(
-              onPressed: controller.login,
-              title: 'ورود به صفحه مدیریت',
-              loading: controller.loginLoading.value,
-            ),
+      body: Center(
+        child: Obx(
+          () => FillButton(
+            onPressed: controller.login,
+            title: 'ورود به صفحه مدیریت',
+            loading: controller.loginLoading.value,
           ),
         ),
-      );
+      ),
+    );
   }
 }
