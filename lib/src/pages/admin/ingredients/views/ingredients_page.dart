@@ -1,40 +1,37 @@
-import 'package:cooking/src/infrastructures/utils/utils.dart';
-import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_controller.dart';
-import 'package:cooking/src/pages/admin/ingredients/controllers/ingredients_register_controller.dart';
-import 'package:cooking/src/pages/admin/ingredients/models/ingredients_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../shared/views/empty_page.dart';
+import '../../../../infrastructures/utils/utils.dart';
+import '../controllers/ingredients_controller.dart';
+import '../controllers/ingredients_register_controller.dart';
 import 'dialog/modify_ingredients_dialog.dart';
-import 'widgets/ingredients_list_item.dart';
+import 'widgets/ingredients_list.dart';
 
 class IngredientsPage extends StatelessWidget {
-  final controller= Get.put(IngredientsController());
-   IngredientsPage({final Key? key}) : super(key: key);
+  final controller = Get.put(IngredientsController());
+
+  IngredientsPage({final Key? key}) : super(key: key);
 
   @override
-  @override
   Widget build(final BuildContext context) => Scaffold(
+    resizeToAvoidBottomInset: false,
         floatingActionButton: _addButton(),
-        appBar: AppBar(
-          title: const Text('مواد اولیه'),
-          centerTitle: true,
-          excludeHeaderSemantics: true,
+        appBar: _appBar(),
+        body: _body(),
+      );
+
+  Widget _body() => Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: Utils.maxWith),
+           child: const IngredientsList(),
         ),
-        body: Align(
-          alignment: Alignment.topCenter,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: Utils.maxWith),
-            child: IngredientsListItem(
-              ingredientsViewModel: IngredientsViewModel(
-                  title: 'گوجه فرنگی', ingredientUnitTitle: 'گرم'),
-            ),
-          ),
-        ),
-        // body: const EmptyPage(
-        //       title: 'تاکنون مواد اولیه ای ثبت نشده است.',
-        //     ),
+      );
+
+  AppBar _appBar() => AppBar(
+        title: const Text('مواد اولیه'),
+        centerTitle: true,
+        excludeHeaderSemantics: true,
       );
 
   Widget _addButton() => FloatingActionButton(
@@ -43,6 +40,13 @@ class IngredientsPage extends StatelessWidget {
       );
 
   Future<dynamic> _onAddTaped() => Utils.showDialog(
-        page: ModifyIngredientsDialog(() => IngredientsRegisterController()),
+        thenValue: (final result) {
+          if (result) {
+            return controller.resetAndGetIngredients();
+          }
+        },
+        page: ModifyIngredientsDialog(
+          () => IngredientsRegisterController(),
+        ),
       );
 }

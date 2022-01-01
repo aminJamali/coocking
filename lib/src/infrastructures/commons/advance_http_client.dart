@@ -1,17 +1,18 @@
 import 'dart:async';
 
-import 'package:cooking/src/infrastructures/commons/parameters.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class HttpClient {
+import 'parameters.dart';
+
+class AdvanceHttpClient {
   final String baseUrl;
   final String? exceptionPrefix;
   Dio? _dio;
   final void Function(String exceptionKey) handleExceptionCallBack;
   final bool disableGeneralInterceptor;
 
-  HttpClient({
+  AdvanceHttpClient({
     required final this.baseUrl,
     required final this.handleExceptionCallBack,
    final this.disableGeneralInterceptor = false,
@@ -195,11 +196,14 @@ class HttpClient {
       final DioError dioError, final bool disableHandleException) {
     print(dioError.requestOptions.path);
     print(dioError.requestOptions.data);
-    print('${dioError.response!.statusCode} ${dioError.response!.statusMessage}');
-    if (dioError.response!.statusCode==500){
-      print('"error": ${dioError.response!.data['error']}');
-      print('"description": ${dioError.response!.data['description']}');
+    if (dioError.type==DioErrorType.response){
+      print('${dioError.response!.statusCode} ${dioError.response!.statusMessage}');
+      if (dioError.response!.statusCode==500){
+        print('"error": ${dioError.response!.data['error']}');
+        print('"description": ${dioError.response!.data['description']}');
+      }
     }
+
 
     final String exception = _getErrorKey(dioError);
     if (!disableHandleException) {

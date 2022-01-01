@@ -9,19 +9,22 @@ class UrlRepository {
   static String documentsUrl = '/$documents';
 
   static String getDocumentsUrl(
-          {required final String documentId, final String? query = ''}) =>
+          {required final String documentId, final String? query}) =>
       '/$documents/$documentId$query';
 
   static String ingredientsUrl = '/$ingredients';
 
-  static String getIngredientsUrl({required final String ingredientId}) =>
+  static String getIngredientsUrl({required final int ingredientId}) =>
       '/$ingredients/$ingredientId';
 
-  static String getAllIngredientsUrl({final String? query = ''}) =>
+  static String getAllIngredientsUrl({final String? query}) =>
       '/$ingredients$query';
 
   static String getAllStepOperationsUrl({final String? query = ''}) =>
       '/$stepOperations$query';
 
   static String loginUrl = '/$userManagement/$login';
+
+  static String getIngredientUnitsUrl({final String? query}) =>
+      '/$ingredientUnits$query';
 }

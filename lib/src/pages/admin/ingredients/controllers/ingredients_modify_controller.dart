@@ -1,24 +1,52 @@
-import 'package:cooking/src/pages/admin/ingredients/models/ingredients_view_model.dart';
+import 'package:cooking/src/pages/admin/ingredients/models/ingredients_dto.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../models/ingredient_units_list_view_model.dart';
+import '../models/ingredient_units_view_model.dart';
+import '../models/ingredients_view_model.dart';
+import '../repositories/modify_ingredients_repository.dart';
+
 abstract class IngredientsModifyController extends GetxController {
+  final ModifyIngredientsRepository modifyIngredientsRepository =
+      ModifyIngredientsRepository();
   GlobalKey<FormState> modifyMaterialFormKey = GlobalKey<FormState>();
   TextEditingController rawMaterial = TextEditingController();
   IngredientsViewModel? ingredientsViewModel;
-  RxBool loadingSubmit=false.obs;
+  IngredientsDto ingredientsDto =
+      IngredientsDto(ingredientUnitId: 0, title: '');
+  RxBool loadingSubmit = false.obs, unitListLoading = false.obs;
+  IngredientUnitsViewModel? selectedUnit;
 
   void submitTaped();
 
-  void titleSaved(final String title);
+  List<IngredientUnitsViewModel> unitItems = <IngredientUnitsViewModel>[];
 
-  void unitSaved(final String unit);
+  Future<bool> getUnits() async {
+    bool result = false;
+    unitListLoading.value = true;
+    final Either<String, IngredientUnitsListViewModel> response =
+        await modifyIngredientsRepository.getIngredientsUnit(query: '');
+    response.fold(
+      (final exception) {
+        unitListLoading.value = false;
+        result = false;
+      },
+      (final units) {
+        unitListLoading.value = false;
+        unitItems.addAll(units.elements!);
+        result = true;
+      },
+    );
+    return result;
+  }
 
-  List<String> unitItems = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-  ];
+  void onUnitSelected(final IngredientUnitsViewModel? unit) {
+    if (unit == null) {
+      return;
+    }
+    selectedUnit = unit;
+    ingredientsDto.ingredientUnitId = unit.id;
+  }
 }
