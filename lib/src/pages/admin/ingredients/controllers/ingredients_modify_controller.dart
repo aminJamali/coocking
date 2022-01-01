@@ -24,29 +24,29 @@ abstract class IngredientsModifyController extends GetxController {
   List<IngredientUnitsViewModel> unitItems = <IngredientUnitsViewModel>[];
 
   Future<bool> getUnits() async {
-    bool result=false;
+    bool result = false;
     unitListLoading.value = true;
     final Either<String, IngredientUnitsListViewModel> response =
         await modifyIngredientsRepository.getIngredientsUnit(query: '');
     response.fold(
       (final exception) {
-         unitListLoading.value = false;
-         result=false;
+        unitListLoading.value = false;
+        result = false;
       },
       (final units) {
         unitListLoading.value = false;
         unitItems.addAll(units.elements!);
-        result=true;
+        result = true;
       },
     );
     return result;
   }
 
-  void onUnitSelected(final IngredientUnitsViewModel? unit){
-    if(unit==null){
+  void onUnitSelected(final IngredientUnitsViewModel? unit) {
+    if (unit == null) {
       return;
     }
-    selectedUnit=unit;
-    ingredientsDto.ingredientUnitId=unit.id;
+    selectedUnit = unit;
+    ingredientsDto.ingredientUnitId = unit.id;
   }
 }

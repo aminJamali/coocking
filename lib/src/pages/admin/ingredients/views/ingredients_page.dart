@@ -14,6 +14,7 @@ class IngredientsPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
+    resizeToAvoidBottomInset: false,
         floatingActionButton: _addButton(),
         appBar: _appBar(),
         body: _body(),

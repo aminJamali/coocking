@@ -1,9 +1,10 @@
-import 'package:cooking/src/infrastructures/commons/parameters.dart';
-import 'package:cooking/src/infrastructures/routes/routes.dart';
-import 'package:cooking/src/pages/login/models/login_dto.dart';
-import 'package:cooking/src/pages/login/repositories/login_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
+
+import '../../../infrastructures/commons/parameters.dart';
+import '../../../infrastructures/routes/routes.dart';
+import '../models/login_dto.dart';
+import '../repositories/login_repository.dart';
 
 class LoginController extends GetxController {
   final LoginRepository _loginRepository = LoginRepository();
