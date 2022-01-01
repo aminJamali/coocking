@@ -1,4 +1,4 @@
-import 'package:cooking/src/infrastructures/commons/http_client.dart';
+import 'package:cooking/src/infrastructures/commons/advance_http_client.dart';
 import 'package:cooking/src/infrastructures/commons/url_repository.dart';
 import 'package:cooking/src/infrastructures/utils/utils.dart';
 import 'package:cooking/src/pages/admin/step_operations/models/step_operation_list_view_model.dart';
@@ -6,7 +6,7 @@ import 'package:cooking/src/pages/admin/step_operations/models/step_operation_vi
 import 'package:dartz/dartz.dart';
 
 class StepOperationRepository {
-  HttpClient? _httpClient;
+  AdvanceHttpClient? _httpClient;
 
   StepOperationRepository() {
     _httpClient = Utils.http();
