@@ -1,10 +1,9 @@
-import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../infrastructures/commons/parameters.dart';
 import '../../../infrastructures/utils/utils.dart';
 import '../controllers/upload_document_controller.dart';
 import '../models/pick_image_enum.dart';
@@ -72,7 +71,7 @@ class _ImagePickersState extends State<ImagePickers> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              if (Platform.isAndroid || Platform.isIOS) _cameraButton(),
+              if (!kIsWeb) _cameraButton(),
               _galleryButton(),
             ],
           ),
@@ -108,12 +107,6 @@ class _ImagePickersState extends State<ImagePickers> {
           style: TextStyle(fontSize: 20),
         ),
         onPressed: () => _pickImage(PickImage.gallery),
-      );
-
-  Widget _image() => Image.network(
-        '${Parameters.fullUrl}/documents/$_avatarId',
-        headers: {'authorization': 'Bearer ${Parameters.token}'},
-        fit: BoxFit.fill,
       );
 
   Widget _addPhotoIcon() => Positioned(

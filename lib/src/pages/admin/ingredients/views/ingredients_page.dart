@@ -41,7 +41,7 @@ class IngredientsPage extends StatelessWidget {
 
   Future<dynamic> _onAddTaped() => Utils.showDialog(
         thenValue: (final result) {
-          if (result) {
+          if (result??false) {
             return controller.resetAndGetIngredients();
           }
         },

@@ -33,6 +33,7 @@ class IngredientsListItem extends StatelessWidget {
 
   Widget _item() => Row(
         children: [
+
           AdvanceNetworkImage(
             imageSize: 80,
             documentId: ingredientsViewModel.avatarId,

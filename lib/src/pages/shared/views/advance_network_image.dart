@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:octo_image/octo_image.dart';
 
 import '../../../infrastructures/commons/parameters.dart';
+import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import '../../../infrastructures/utils/utils.dart';
 
 class AdvanceNetworkImage extends StatelessWidget {
@@ -24,11 +27,19 @@ class AdvanceNetworkImage extends StatelessWidget {
         child: documentId != null ? _image() : _defaultIcon(),
       );
 
-  Widget _image() => Image.network(
-        '${Parameters.fullUrl}/documents/$documentId',
-        headers: {'authorization': 'Bearer ${Parameters.token}'},
+  Widget _image() => OctoImage(
+        image: CachedNetworkImageProvider(
+          '${Parameters.fullUrl}/documents/$documentId',
+          headers: {'authorization': 'Bearer ${Parameters.token}'},
+          imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+        ),
+        placeholderBuilder: OctoPlaceholder.blurHash(
+          'LEHV6nWB2yk8pyo0adR*.7kCMdnj',
+        ),
+        errorBuilder: OctoError.icon(color: Get.theme.colorScheme.error),
         fit: BoxFit.cover,
       );
+
 
   Widget _defaultIcon() => Center(
         child: Icon(
