@@ -1,4 +1,4 @@
-package com.example.cooking
+package ir.kachichef.demo
 
 import io.flutter.embedding.android.FlutterActivity
 

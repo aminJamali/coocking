@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => GetMaterialApp(
-        title: 'Flutter Demo',
+        title: 'Kachi Chef',
         debugShowCheckedModeBanner: false,
         locale: const Locale('fa', 'IR'),
     theme: cookingThemeData,

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cooking">
+    package="ir.kachichef.demo">
    <application
-        android:label="cooking"
+        android:label="Kachi Chef"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
