@@ -24,6 +24,7 @@ final pages = [
   ),
   GetPage(
     name: Routes.drawerPage,
+    middlewares: _middleware,
     page: () => const DrawerScreen(),
   ),
   GetPage(

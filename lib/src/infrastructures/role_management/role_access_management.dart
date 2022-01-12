@@ -8,7 +8,7 @@ class RoleAccessManagement {
       Roles.admin,
       Roles.user,
     ],
-
+    Routes.drawerPage:[Roles.admin],
 
   };
 }

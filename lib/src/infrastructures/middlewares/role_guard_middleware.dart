@@ -1,8 +1,8 @@
-import 'package:cooking/src/infrastructures/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../role_management/user_access.dart';
+import '../routes/routes.dart';
 
 class RoleGuardMiddleware extends GetMiddleware {
   @override
