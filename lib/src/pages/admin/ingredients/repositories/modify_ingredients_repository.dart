@@ -18,7 +18,7 @@ class ModifyIngredientsRepository {
       _url,
     );
     return response.fold(
-          (final exception) => Left(exception),
+          Left.new,
           (final data) => Right(IngredientsViewModel.fromJson(data)),
     );
   }
@@ -29,8 +29,8 @@ class ModifyIngredientsRepository {
     final Either<String, dynamic> response =
     await _httpClient.post(_url, data: ingredientsDto.toJson());
     return response.fold(
-          (final exception) => Left(exception),
-          (final data) => Right(data),
+          Left.new,
+          (final data) => Right(data as String),
     );
   }
 
@@ -42,8 +42,8 @@ class ModifyIngredientsRepository {
     final Either<String, dynamic> response =
     await _httpClient.put(_url, data: ingredientsDto.toJson());
     return response.fold(
-          (final exception) => Left(exception),
-          (final data) => Right(data),
+          Left.new,
+          (final data) => Right(data as String),
     );
   }
 
@@ -54,7 +54,7 @@ class ModifyIngredientsRepository {
       _url,
     );
     return response.fold(
-          (final exception) => Left(exception),
+          Left.new,
           (final data) => Right(IngredientUnitsListViewModel.fromJson(data)),
     );
   }

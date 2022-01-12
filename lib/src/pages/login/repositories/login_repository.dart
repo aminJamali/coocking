@@ -14,8 +14,8 @@ class LoginRepository {
     final Either<String, dynamic> response =
         await _httpClient.post(_url, data: loginDto.toJson());
     return response.fold(
-      (final exception) => Left(exception),
-      (final data) => Right(data),
+      Left.new,
+      (final data) => Right(data as String),
     );
   }
 }

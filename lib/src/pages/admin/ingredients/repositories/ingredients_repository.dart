@@ -13,7 +13,7 @@ class IngredientsRepository {
     final String _url = UrlRepository.getAllIngredientsUrl(query: query);
     final Either<String, dynamic> response = await _httpClient.get(_url);
     return response.fold(
-      (final exception) => Left(exception),
+      Left.new,
       (final data) => Right(IngredientsListViewModel.fromJson(data)),
     );
   }
@@ -24,8 +24,8 @@ class IngredientsRepository {
         UrlRepository.getIngredientsUrl(ingredientId: ingredientId);
     final Either<String, dynamic> response = await _httpClient.delete(_url);
     return response.fold(
-      (final exception) => Left(exception),
-      (final data) => Right(data),
+      Left.new,
+      (final data) => Right(data as String),
     );
   }
 }

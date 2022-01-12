@@ -14,7 +14,7 @@ class IngredientsPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-    resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         floatingActionButton: _addButton(),
         appBar: _appBar(),
         body: _body(),
@@ -24,7 +24,7 @@ class IngredientsPage extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: Utils.maxWith),
-           child: const IngredientsList(),
+          child: const IngredientsList(),
         ),
       );
 
@@ -41,12 +41,12 @@ class IngredientsPage extends StatelessWidget {
 
   Future<dynamic> _onAddTaped() => Utils.showDialog(
         thenValue: (final result) {
-          if (result??false) {
+          if (result ?? false) {
             return controller.resetAndGetIngredients();
           }
         },
-        page: ModifyIngredientsDialog(
-          () => IngredientsRegisterController(),
+        page: const ModifyIngredientsDialog(
+          IngredientsRegisterController.new,
         ),
       );
 }
