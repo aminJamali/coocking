@@ -21,7 +21,7 @@ class IngredientsList extends GetView<IngredientsController> {
             key: controller.paginationList.key,
             items: controller.paginationList.list,
             hasMoreData: controller.paginationList.hasMoreData.value,
-            onRefreshData: controller.resetAndGetIngredients,
+            onRefreshData: controller.refreshIngredients,
             onLoadMoreData: controller.getAllIngredients,
             itemBuilder: (
               final context,

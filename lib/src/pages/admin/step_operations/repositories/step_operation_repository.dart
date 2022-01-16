@@ -14,7 +14,7 @@ class StepOperationRepository {
 
   Future<Either<String, StepOperationListViewModel>> getAllIngredients(
       {final String? query}) async {
-    final String _url = UrlRepository.getAllIngredientsUrl();
+    final String _url = UrlRepository.ingredientsUrlByQuery();
     final Either<String, dynamic> response = await _httpClient!.get(
       _url,
     );

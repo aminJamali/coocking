@@ -7,13 +7,13 @@ import '../models/ingredient_units_list_view_model.dart';
 import '../models/ingredients_dto.dart';
 import '../models/ingredients_view_model.dart';
 
-class ModifyIngredientsRepository {
+class IngredientsModifyRepository {
   final AdvanceHttpClient _httpClient=Utils.http();
 
 
   Future<Either<String, IngredientsViewModel>> getIngredientById(
       {required final int id}) async {
-    final String _url = UrlRepository.getIngredientsUrl(ingredientId: id);
+    final String _url = UrlRepository.ingredientsUrlById(ingredientId: id);
     final Either<String, dynamic> response = await _httpClient.get(
       _url,
     );
@@ -38,7 +38,7 @@ class ModifyIngredientsRepository {
       {required final IngredientsDto ingredientsDto,
         required final int ingredientId}) async {
     final String _url =
-    UrlRepository.getIngredientsUrl(ingredientId: ingredientId);
+    UrlRepository.ingredientsUrlById(ingredientId: ingredientId);
     final Either<String, dynamic> response =
     await _httpClient.put(_url, data: ingredientsDto.toJson());
     return response.fold(

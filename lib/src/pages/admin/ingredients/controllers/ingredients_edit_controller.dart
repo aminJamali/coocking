@@ -1,7 +1,7 @@
-import 'package:cooking/src/infrastructures/utils/utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
+import '../../../../infrastructures/utils/utils.dart';
 import '../models/ingredients_view_model.dart';
 import 'ingredients_modify_controller.dart';
 

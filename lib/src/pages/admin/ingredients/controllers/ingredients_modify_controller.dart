@@ -1,16 +1,16 @@
-import 'package:cooking/src/pages/admin/ingredients/models/ingredients_dto.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/ingredient_units_list_view_model.dart';
 import '../models/ingredient_units_view_model.dart';
+import '../models/ingredients_dto.dart';
 import '../models/ingredients_view_model.dart';
-import '../repositories/modify_ingredients_repository.dart';
+import '../repositories/ingredients_modify_repository.dart';
 
 abstract class IngredientsModifyController extends GetxController {
-  final ModifyIngredientsRepository modifyIngredientsRepository =
-      ModifyIngredientsRepository();
+  final IngredientsModifyRepository modifyIngredientsRepository =
+      IngredientsModifyRepository();
   GlobalKey<FormState> modifyMaterialFormKey = GlobalKey<FormState>();
   TextEditingController rawMaterial = TextEditingController();
   IngredientsViewModel? ingredientsViewModel;

@@ -47,7 +47,7 @@ class AdminPage extends StatelessWidget {
                 SizedBox(
                   width: Get.width,
                   child: _headerButtonBuilder(
-                      onTaped: () {},
+                      onTaped: () => Get.toNamed(Routes.recipePage),
                       title: 'دستور پخت',
                       icon: Icons.outdoor_grill_outlined),
                 ),
