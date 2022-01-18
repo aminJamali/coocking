@@ -1,3 +1,4 @@
+import 'package:cooking/src/pages/admin/step_operations/views/step_operations_page.dart';
 import 'package:get/get.dart';
 
 import '../../pages/admin/ingredients/views/ingredients_page.dart';
@@ -22,5 +23,9 @@ final pages = [
   GetPage(
     name: Routes.drawerPage,
     page: () => const DrawerScreen(),
+  ),
+  GetPage(
+    name: Routes.stepOperationsPage,
+    page: () => const StepOperationsPage(),
   ),
 ];

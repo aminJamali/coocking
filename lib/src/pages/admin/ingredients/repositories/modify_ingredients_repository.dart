@@ -8,8 +8,7 @@ import '../models/ingredients_dto.dart';
 import '../models/ingredients_view_model.dart';
 
 class ModifyIngredientsRepository {
-  final AdvanceHttpClient _httpClient=Utils.http();
-
+  final AdvanceHttpClient _httpClient = Utils.http();
 
   Future<Either<String, IngredientsViewModel>> getIngredientById(
       {required final int id}) async {
@@ -18,8 +17,8 @@ class ModifyIngredientsRepository {
       _url,
     );
     return response.fold(
-          (final exception) => Left(exception),
-          (final data) => Right(IngredientsViewModel.fromJson(data)),
+      (final exception) => Left(exception),
+      (final data) => Right(IngredientsViewModel.fromJson(data)),
     );
   }
 
@@ -27,23 +26,23 @@ class ModifyIngredientsRepository {
       {required final IngredientsDto ingredientsDto}) async {
     final String _url = UrlRepository.ingredientsUrl;
     final Either<String, dynamic> response =
-    await _httpClient.post(_url, data: ingredientsDto.toJson());
+        await _httpClient.post(_url, data: ingredientsDto.toJson());
     return response.fold(
-          (final exception) => Left(exception),
-          (final data) => Right(data),
+      (final exception) => Left(exception),
+      (final data) => Right(data),
     );
   }
 
   Future<Either<String, String>> editIngredient(
       {required final IngredientsDto ingredientsDto,
-        required final int ingredientId}) async {
+      required final int ingredientId}) async {
     final String _url =
-    UrlRepository.getIngredientsUrl(ingredientId: ingredientId);
+        UrlRepository.getIngredientsUrl(ingredientId: ingredientId);
     final Either<String, dynamic> response =
-    await _httpClient.put(_url, data: ingredientsDto.toJson());
+        await _httpClient.put(_url, data: ingredientsDto.toJson());
     return response.fold(
-          (final exception) => Left(exception),
-          (final data) => Right(data),
+      (final exception) => Left(exception),
+      (final data) => Right(data),
     );
   }
 
@@ -54,8 +53,8 @@ class ModifyIngredientsRepository {
       _url,
     );
     return response.fold(
-          (final exception) => Left(exception),
-          (final data) => Right(IngredientUnitsListViewModel.fromJson(data)),
+      (final exception) => Left(exception),
+      (final data) => Right(IngredientUnitsListViewModel.fromJson(data)),
     );
   }
 }

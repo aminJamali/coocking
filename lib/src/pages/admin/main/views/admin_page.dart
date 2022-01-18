@@ -37,7 +37,7 @@ class AdminPage extends StatelessWidget {
                     Utils.largeHorizontalSpace,
                     Expanded(
                       child: _headerButtonBuilder(
-                          onTaped: () {},
+                          onTaped: () => Get.toNamed(Routes.stepOperationsPage),
                           title: 'مراحل پخت',
                           icon: Icons.microwave_outlined),
                     ),

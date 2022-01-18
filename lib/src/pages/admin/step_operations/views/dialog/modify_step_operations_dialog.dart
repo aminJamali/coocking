@@ -32,7 +32,10 @@ class ModifyStepOperationsDialog<T extends ModifyStepOperationController>
                   Utils.smallVerticalSpace,
                   ..._header(),
                   Utils.largeVerticalSpace,
-                  const ImagePickers(),
+                  ImagePickers(
+                    onPickFile: onImageSelected,
+                    avatarId: controller.addStepOperationDto.avatarId,
+                  ),
                   Padding(
                     padding: Utils.largePadding,
                     child: _title(),
@@ -54,10 +57,10 @@ class ModifyStepOperationsDialog<T extends ModifyStepOperationController>
 
   Widget _title() => TextFormField(
         validator: Utils.validateText,
-        //  initialValue: controller.ingredientsViewModel?.title,
+        initialValue: controller.addStepOperationDto.title,
         decoration: UtilsTheme.textFormFieldDecoration(
-            hint: 'مثال: شکر', label: 'عنوان'),
-        // onSaved: (final value) => controller.titleSaved(value!),
+            hint: 'مثال: گوجه ها را خورد میکنیم', label: 'عنوان'),
+        onSaved: (final value) => controller.addStepOperationDto.title = value!,
       );
 
   List<Widget> _header() => [
@@ -72,10 +75,15 @@ class ModifyStepOperationsDialog<T extends ModifyStepOperationController>
       ];
 
   Text _headerTitle() => Text(
-        'تعریف دستور پخت',
+        'تعریف مرحله پخت',
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Theme.of(Get.context!).colorScheme.primary),
       );
+
+  void onImageSelected(final String avatarId) {
+    controller.addStepOperationDto.avatarId = avatarId;
+    controller.addStepOperationDto.extension = 'jpg';
+  }
 }
