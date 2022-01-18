@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 
 import '../../../../infrastructures/utils/utils.dart';
 import '../models/ingredients_view_model.dart';
-import 'ingredients_modify_controller.dart';
+import 'ingredients_modify_base_controller.dart';
 
-class IngredientsEditController extends IngredientsModifyController {
+class IngredientsEditController extends IngredientsModifyBaseController {
   IngredientsEditController(this.initIngredientViewModel);
 
   IngredientsViewModel initIngredientViewModel;

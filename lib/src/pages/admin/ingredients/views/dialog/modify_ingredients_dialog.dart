@@ -8,10 +8,10 @@ import '../../../../shared/views/dialogs/blur_dialog.dart';
 import '../../../../shared/views/fill_button.dart';
 import '../../../../shared/views/getx_view.dart';
 import '../../../../shared/views/image_picker.dart';
-import '../../controllers/ingredients_modify_controller.dart';
+import '../../controllers/ingredients_modify_base_controller.dart';
 import '../../models/ingredient_units_view_model.dart';
 
-class ModifyIngredientsDialog<T extends IngredientsModifyController>
+class ModifyIngredientsDialog<T extends IngredientsModifyBaseController>
     extends GetxView<T> {
   const ModifyIngredientsDialog(final GetxViewBuilder<T> controller,
       {final Key? key})
@@ -68,7 +68,7 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
             : DropdownButtonFormField<IngredientUnitsViewModel>(
                 value: controller.selectedUnit,
                 decoration: UtilsTheme.textFormFieldDecoration(label: 'واحد*'),
-                onSaved:controller.onUnitSelected,
+                onSaved: controller.onUnitSelected,
                 onChanged: (final value) => {},
                 validator: (final value) => Utils.validateText(value?.title),
                 items: controller.unitItems
@@ -82,16 +82,15 @@ class ModifyIngredientsDialog<T extends IngredientsModifyController>
   Widget _title() => TextFormField(
       validator: Utils.validateText,
       initialValue: controller.ingredientsViewModel?.title,
-      decoration:
-          UtilsTheme.textFormFieldDecoration(hint: 'مثال: شکر', label: 'عنوان*'),
+      decoration: UtilsTheme.textFormFieldDecoration(
+          hint: 'مثال: شکر', label: 'عنوان*'),
       onSaved: (final value) => controller.ingredientsDto.title = value!);
 
-  Widget _header()=>DialogHeader(
-    icon:  Icons.app_registration_outlined,
-    color: Get.theme.colorScheme.primary,
-    title: 'تعریف مواد اولیه',
-  );
-
+  Widget _header() => DialogHeader(
+        icon: Icons.app_registration_outlined,
+        color: Get.theme.colorScheme.primary,
+        title: 'تعریف مواد اولیه',
+      );
 
   void onImageSelected(final String avatarId) {
     controller.ingredientsDto.avatarId = avatarId;

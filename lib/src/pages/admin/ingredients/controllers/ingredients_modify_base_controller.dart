@@ -8,7 +8,7 @@ import '../models/ingredients_dto.dart';
 import '../models/ingredients_view_model.dart';
 import '../repositories/ingredients_modify_repository.dart';
 
-abstract class IngredientsModifyController extends GetxController {
+abstract class IngredientsModifyBaseController extends GetxController {
   final IngredientsModifyRepository modifyIngredientsRepository =
       IngredientsModifyRepository();
   GlobalKey<FormState> modifyMaterialFormKey = GlobalKey<FormState>();

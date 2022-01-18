@@ -5,6 +5,8 @@ class UrlRepository {
   static String userManagement = 'user-management';
   static String stepOperations = 'step-operation';
   static String recipes = 'recipes';
+  static String recipeCategories = 'recipe-categories';
+  static String nationalities = 'nationalities';
   static String login = 'login';
 
   static String documentsUrl = '/$documents';
@@ -35,4 +37,9 @@ class UrlRepository {
 
   static String recipeUrlById({required final int recipeId}) =>
       '$recipeUrl/$recipeId';
+
+  static String recipeCategoryUrl = '/$recipeCategories';
+
+  static String nationalityUrlByQuery({final String? query}) =>
+      '/$nationalities$query';
 }

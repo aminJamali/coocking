@@ -95,4 +95,17 @@ class Utils {
     final formData = FormData.fromMap({'file': multipartFile});
     return formData;
   }
+
+ static String convertDurationToTime(final int duration) {
+    final String hour =
+    convertDurationToHour(duration).toString().padLeft(2, '0');
+    final String minute =
+    convertDurationToMinute(duration).toString().padLeft(2, '0');
+
+    return '$hour:$minute';
+  }
+
+ static int convertDurationToHour(final int duration) => duration ~/ 60;
+
+ static int convertDurationToMinute(final int duration) => duration % 60;
 }

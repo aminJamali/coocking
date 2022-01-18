@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
 import '../../../../infrastructures/utils/utils.dart';
-import 'ingredients_modify_controller.dart';
+import 'ingredients_modify_base_controller.dart';
 
-class IngredientsRegisterController extends IngredientsModifyController {
+class IngredientsRegisterController extends IngredientsModifyBaseController {
   @override
   void onInit() {
     getUnits();
@@ -17,7 +17,7 @@ class IngredientsRegisterController extends IngredientsModifyController {
       if (ingredientsDto.avatarId != null) {
         modifyMaterialFormKey.currentState!.save();
         registerIngredient();
-      }else{
+      } else {
         Utils.errorToast(message: 'انتخاب تصویر اجباری می باشد!');
       }
     }

@@ -5,5 +5,7 @@ class Routes {
   static const ingredientsPage = '/ingredients_page';
   static const registerRawMaterialPage = '/register_raw_material_page';
   static const recipePage = '/recipe_page';
+  static const registerRecipePage = '/register_recipe_page';
+  static const editRecipePage = '/edit_recipe_page';
   static const accessDeniedPage = '/403';
 }
