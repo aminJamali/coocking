@@ -15,8 +15,8 @@ class UrlRepository {
   static String ingredientsUrl = '/$ingredients';
   static String stepOperationsUrl = '/$stepOperations';
 
-  static String getIngredientsUrl({required final int ingredientId}) =>
-      '/$ingredients/$ingredientId';
+  static String ingredientsUrlById({required final int ingredientId}) =>
+      '$ingredientsUrl/$ingredientId';
 
   static String getStepOpeartionsUrl({required final int stepOperationId}) =>
       '/$ingredients/$stepOperationId';
@@ -31,4 +31,11 @@ class UrlRepository {
 
   static String getIngredientUnitsUrl({final String? query}) =>
       '/$ingredientUnits$query';
+
+  static String recipeUrl = '/$recipes';
+
+  static String recipeUrlByQuery({final String? query}) => '$recipeUrl$query';
+
+  static String recipeUrlById({required final int recipeId}) =>
+      '$recipeUrl/$recipeId';
 }

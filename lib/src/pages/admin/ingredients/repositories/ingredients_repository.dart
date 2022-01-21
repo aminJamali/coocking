@@ -8,12 +8,11 @@ class IngredientsRepository {
   final AdvanceHttpClient _httpClient = Utils.http();
 
   Future<Either<String, IngredientsListViewModel>> getAllIngredients(
-
       {required final String query}) async {
     final String _url = UrlRepository.getAllIngredientsUrl(query: query);
     final Either<String, dynamic> response = await _httpClient.get(_url);
     return response.fold(
-      (final exception) => Left(exception),
+      Left.new,
       (final data) => Right(IngredientsListViewModel.fromJson(data)),
     );
   }
@@ -21,11 +20,11 @@ class IngredientsRepository {
   Future<Either<String, String>> deleteIngredient(
       {required final int ingredientId}) async {
     final String _url =
-        UrlRepository.getIngredientsUrl(ingredientId: ingredientId);
+        UrlRepository.ingredientsUrlById(ingredientId: ingredientId);
     final Either<String, dynamic> response = await _httpClient.delete(_url);
     return response.fold(
-      (final exception) => Left(exception),
-      (final data) => Right(data),
+      Left.new,
+      (final data) => Right(data as String),
     );
   }
 }

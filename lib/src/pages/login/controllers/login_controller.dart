@@ -1,5 +1,7 @@
+import 'package:cooking/src/pages/shared/models/token_info.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../infrastructures/commons/parameters.dart';
 import '../../../infrastructures/routes/routes.dart';
@@ -20,6 +22,8 @@ class LoginController extends GetxController {
       (final result) {
         loginLoading.value = false;
         Parameters.token=result;
+        final Map<String, dynamic> decodedToken = JwtDecoder.decode(result);
+        TokenInfo.fromJson(decodedToken);
         Get.toNamed(Routes.drawerPage);
       },
     );

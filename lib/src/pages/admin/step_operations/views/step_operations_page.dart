@@ -1,8 +1,8 @@
 import 'package:cooking/src/infrastructures/utils/utils.dart';
 import 'package:cooking/src/pages/admin/step_operations/controllers/add_step_operation_controller.dart';
-import 'package:cooking/src/pages/admin/step_operations/controllers/modify_step_operations_controller.dart';
-import 'package:cooking/src/pages/admin/step_operations/views/dialog/modify_step_operations_dialog.dart';
 import 'package:flutter/material.dart';
+
+import 'dialog/modify_step_operations_dialog.dart';
 
 class StepOperationsPage extends StatelessWidget {
   const StepOperationsPage({final Key? key}) : super(key: key);
@@ -25,6 +25,6 @@ class StepOperationsPage extends StatelessWidget {
       );
 
   Future<dynamic> _onAddTaped() => Utils.showDialog(
-        page: ModifyStepOperationsDialog(() => AddStepOperationController()),
+        page: const ModifyStepOperationsDialog(AddStepOperationController.new),
       );
 }

@@ -18,7 +18,7 @@ class ModifyStepOperationRepository {
       _url,
     );
     return response.fold(
-      (final exception) => Left(exception),
+      Left.new,
       (final data) => Right(StepOperationViewModel.fromJson(data)),
     );
   }
@@ -29,8 +29,8 @@ class ModifyStepOperationRepository {
     final Either<String, dynamic> response =
         await _httpClient.post(_url, data: addStepOperationDto.toJson());
     return response.fold(
-      (final exception) => Left(exception),
-      (final data) => Right(data),
+      Left.new,
+      (final data) => Right(data as int),
     );
   }
 
@@ -42,8 +42,8 @@ class ModifyStepOperationRepository {
     final Either<String, dynamic> response =
         await _httpClient.put(_url, data: addstepOperationDto.toJson());
     return response.fold(
-      (final exception) => Left(exception),
-      (final data) => Right(data),
+      Left.new,
+      (final data) => Right(data as String),
     );
   }
 }

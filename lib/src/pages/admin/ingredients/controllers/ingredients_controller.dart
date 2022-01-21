@@ -18,7 +18,7 @@ class IngredientsController extends GetxController {
     super.onReady();
   }
 
-  Future<void> resetAndGetIngredients() async {
+  Future<void> refreshIngredients() async {
     resetIngredientsList();
     await getAllIngredients();
   }
