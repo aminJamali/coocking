@@ -38,4 +38,9 @@ class UrlRepository {
 
   static String recipeUrlById({required final int recipeId}) =>
       '$recipeUrl/$recipeId';
+
+  static String recipeCategoryUrl = '/$recipeCategories';
+
+  static String nationalityUrlByQuery({final String? query}) =>
+      '/$nationalities$query';
 }

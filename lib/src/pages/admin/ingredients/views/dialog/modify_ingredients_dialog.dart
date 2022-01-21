@@ -8,7 +8,7 @@ import '../../../../shared/views/dialogs/blur_dialog.dart';
 import '../../../../shared/views/fill_button.dart';
 import '../../../../shared/views/getx_view.dart';
 import '../../../../shared/views/image_picker.dart';
-import '../../controllers/ingredients_modify_controller.dart';
+import '../../controllers/ingredients_modify_base_controller.dart';
 import '../../models/ingredient_units_view_model.dart';
 
 class ModifyIngredientsDialog<T extends IngredientsModifyController>

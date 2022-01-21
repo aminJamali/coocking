@@ -3,8 +3,10 @@ import 'package:dartz/dartz.dart';
 import '../../../../infrastructures/commons/advance_http_client.dart';
 import '../../../../infrastructures/commons/url_repository.dart';
 import '../../../../infrastructures/utils/utils.dart';
+import '../models/recipe_category_view_model.dart';
 import '../models/recipe_full_view_model.dart';
 import '../models/recipe_insert_dto.dart';
+import '../models/recipe_nationality_list_view_model.dart';
 
 class RecipeModifyRepository {
   final AdvanceHttpClient _httpClient = Utils.http();
@@ -19,6 +21,25 @@ class RecipeModifyRepository {
     );
   }
 
+  Future<Either<String, List<RecipeCategoryViewModel>>> getCategory() async {
+    final Either<String, dynamic> response =
+        await _httpClient.get(UrlRepository.recipeCategoryUrl);
+    return response.fold(
+      Left.new,
+      (final data) {
+        final List<RecipeCategoryViewModel> _categories =
+            <RecipeCategoryViewModel>[];
+        if (data != null) {
+          for (final element in data) {
+            _categories.add(RecipeCategoryViewModel.fromJson(element));
+          }
+        }
+
+        return Right(_categories);
+      },
+    );
+  }
+
   Future<Either<String, String>> insertRecipe(
       {required final RecipeInsertDto recipeInsertDto}) async {
     final Either<String, dynamic> response = await _httpClient
@@ -26,6 +47,16 @@ class RecipeModifyRepository {
     return response.fold(
       Left.new,
       (final data) => Right(data as String),
+    );
+  }
+
+  Future<Either<String, RecipeNationalityListViewModel>> getNationality(
+      {required final String query}) async {
+    final String _url = UrlRepository.nationalityUrlByQuery(query: query);
+    final Either<String, dynamic> response = await _httpClient.get(_url);
+    return response.fold(
+      Left.new,
+      (final data) => Right(RecipeNationalityListViewModel.fromJson(data)),
     );
   }
 

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../infrastructures/utils/utils.dart';
 import '../models/ingredients_view_model.dart';
-import 'ingredients_modify_controller.dart';
+import 'ingredients_modify_base_controller.dart';
 
 class IngredientsEditController extends IngredientsModifyController {
   IngredientsEditController(this.initIngredientViewModel);
@@ -33,9 +33,9 @@ class IngredientsEditController extends IngredientsModifyController {
   void submitTaped() {
     if (modifyMaterialFormKey.currentState!.validate()) {
       if (ingredientsDto.avatarId != null) {
-      modifyMaterialFormKey.currentState!.save();
-      registerIngredient();
-      }else{
+        modifyMaterialFormKey.currentState!.save();
+        registerIngredient();
+      } else {
         Utils.errorToast(message: 'انتخاب تصویر اجباری می باشد!');
       }
     }
