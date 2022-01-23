@@ -8,15 +8,9 @@ import '../models/ingredients_dto.dart';
 import '../models/ingredients_view_model.dart';
 import '../repositories/ingredients_modify_repository.dart';
 
-<<<<<<< HEAD:lib/src/pages/admin/ingredients/controllers/ingredients_modify_controller.dart
 abstract class IngredientsModifyController extends GetxController {
   final ModifyIngredientsRepository modifyIngredientsRepository =
       ModifyIngredientsRepository();
-=======
-abstract class IngredientsModifyBaseController extends GetxController {
-  final IngredientsModifyRepository modifyIngredientsRepository =
-      IngredientsModifyRepository();
->>>>>>> 907fb3fe78f037b0e237874bc1cc0871f5ffd466:lib/src/pages/admin/ingredients/controllers/ingredients_modify_base_controller.dart
   GlobalKey<FormState> modifyMaterialFormKey = GlobalKey<FormState>();
   TextEditingController rawMaterial = TextEditingController();
   IngredientsViewModel? ingredientsViewModel;

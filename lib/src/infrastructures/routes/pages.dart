@@ -36,29 +36,7 @@ final pages = [
     page: () => const DrawerScreen(),
   ),
   GetPage(
-<<<<<<< HEAD
     name: Routes.stepOperationsPage,
     page: () => const StepOperationsPage(),
-=======
-    name: Routes.accessDeniedPage,
-    page: () => const AccessDeniedPage(),
-  ),
-  GetPage(
-    name: Routes.recipePage,
-    page: () => const RecipePage(),
-    binding: RecipeBinding(),
-    children: [
-      GetPage(
-        name: Routes.registerRecipePage,
-        binding: RegisterRecipeBinding(),
-        page: () => const RecipeModify<RecipeRegisterController>(),
-      ),
-      GetPage(
-        name: Routes.editRecipePage,
-        binding: EditRecipeBinding(),
-        page: () => const RecipeModify<RecipeEditController>(),
-      ),
-    ],
->>>>>>> 907fb3fe78f037b0e237874bc1cc0871f5ffd466
   ),
 ];

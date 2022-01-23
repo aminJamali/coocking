@@ -5,7 +5,9 @@ class UrlRepository {
   static String userManagement = 'user-management';
   static String stepOperations = '/step-operations';
   static String login = 'login';
-
+  static String recipes = 'recipes';
+  static String recipeCategories = 'recipe-categories';
+  static String nationalities = 'nationalities';
   static String documentsUrl = '/$documents';
 
   static String getDocumentsUrl(
