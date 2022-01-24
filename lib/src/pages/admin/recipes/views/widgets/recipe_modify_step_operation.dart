@@ -36,9 +36,8 @@ class RecipeModifyStepOperation<T extends RecipeModifyBaseController>
                 key: controller.stepDropdownKey,
                 value: controller.selectedStepOperation,
                 decoration:
-                    UtilsTheme.textFormFieldDecoration(label: 'مراحل پخت*'),
+                    UtilsTheme.textFormFieldDecoration(label: 'مراحل پخت'),
                 onChanged: controller.onStepOperationSelected,
-                validator: (final value) => Utils.validateText(value?.title),
                 items: controller.stepOperationItems
                     .map((final items) => DropdownMenuItem(
                           value: items,
@@ -49,8 +48,7 @@ class RecipeModifyStepOperation<T extends RecipeModifyBaseController>
 
   Widget _stepDescription() => TextFormField(
       controller: controller.stepDescriptionTextController,
-      validator: Utils.validateText,
-      decoration: UtilsTheme.textFormFieldDecoration(label: 'توضیحات*'));
+      decoration: UtilsTheme.textFormFieldDecoration(label: 'توضیحات'));
 
   Widget _items() => Container(
         width: Get.width,

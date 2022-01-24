@@ -36,9 +36,8 @@ class RecipeModifyIngredient<T extends RecipeModifyBaseController>
                 key: controller.ingredientDropdownKey,
                 value: controller.selectedIngredient,
                 decoration:
-                    UtilsTheme.textFormFieldDecoration(label: 'مواد اولیه*'),
+                    UtilsTheme.textFormFieldDecoration(label: 'مواد اولیه'),
                 onChanged: controller.onIngredientSelected,
-                validator: (final value) => Utils.validateText(value?.title),
                 items: controller.ingredientsItems
                     .map((final items) => DropdownMenuItem(
                           value: items,
@@ -49,10 +48,9 @@ class RecipeModifyIngredient<T extends RecipeModifyBaseController>
 
   Widget _ingredientCount() => TextFormField(
       controller: controller.ingredientCountTextController,
-      validator: Utils.validateText,
       keyboardType: TextInputType.number,
       decoration:
-          UtilsTheme.textFormFieldDecoration(hint: 'مثال: 2', label: 'تعداد*'));
+          UtilsTheme.textFormFieldDecoration(hint: 'مثال: 2', label: 'تعداد'));
 
   Widget _items() => Container(
         width: Get.width,
