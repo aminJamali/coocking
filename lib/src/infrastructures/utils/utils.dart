@@ -40,6 +40,7 @@ class Utils {
     width: Utils.largeSpace,
   );
   static const double middleUserImageSize = 50.0;
+  static const double largeUserImageSize = 80.0;
   static const middlePadding = EdgeInsetsDirectional.all(middleSpace);
   static const smallPadding = EdgeInsetsDirectional.all(smallSpace);
   static const tinyPadding = EdgeInsetsDirectional.all(tinySpace);

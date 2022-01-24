@@ -3,7 +3,7 @@ class UrlRepository {
   static String ingredientUnits = 'ingredient-units';
   static String documents = 'documents';
   static String userManagement = 'user-management';
-  static String stepOperations = 'step-operation';
+  static String stepOperations = 'step-operations';
   static String recipes = 'recipes';
   static String recipeCategories = 'recipe-categories';
   static String nationalities = 'nationalities';

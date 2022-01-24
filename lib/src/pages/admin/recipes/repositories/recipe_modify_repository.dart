@@ -1,3 +1,5 @@
+import 'package:cooking/src/pages/admin/ingredients/models/ingredients_list_view_model.dart';
+import 'package:cooking/src/pages/admin/step_operations/models/step_operation_list_view_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../infrastructures/commons/advance_http_client.dart';
@@ -40,13 +42,13 @@ class RecipeModifyRepository {
     );
   }
 
-  Future<Either<String, String>> insertRecipe(
+  Future<Either<String, int>> insertRecipe(
       {required final RecipeInsertDto recipeInsertDto}) async {
     final Either<String, dynamic> response = await _httpClient
         .post(UrlRepository.recipeUrl, data: recipeInsertDto.toJson());
     return response.fold(
       Left.new,
-      (final data) => Right(data as String),
+      (final data) => Right(data as int),
     );
   }
 
@@ -69,6 +71,29 @@ class RecipeModifyRepository {
     return response.fold(
       Left.new,
       (final data) => Right(data as String),
+    );
+  }
+
+  Future<Either<String, IngredientsListViewModel>> getAllIngredients(
+
+      {required final String query}) async {
+    final String _url = UrlRepository.ingredientsUrlByQuery(query: query);
+    final Either<String, dynamic> response = await _httpClient.get(_url);
+    return response.fold(
+      Left.new,
+          (final data) => Right(IngredientsListViewModel.fromJson(data)),
+    );
+  }
+
+  Future<Either<String, StepOperationListViewModel>> getAllStepOperation(
+      {final String? query}) async {
+    final String _url = UrlRepository.getAllStepOperationsUrl();
+    final Either<String, dynamic> response = await _httpClient.get(
+      _url,
+    );
+    return response.fold(
+      Left.new,
+          (final data) => Right(StepOperationListViewModel.fromJson(data)),
     );
   }
 }

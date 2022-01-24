@@ -8,14 +8,17 @@ import '../../../infrastructures/utils/utils.dart';
 import '../controllers/upload_document_controller.dart';
 import '../models/pick_image_enum.dart';
 import 'advance_network_image.dart';
+import 'fill_button.dart';
 
 class ImagePickers extends StatefulWidget {
   final String? avatarId;
   final void Function(String)? onPickFile;
+  final bool hasAddIcon;
 
   const ImagePickers({
     final this.onPickFile,
     final this.avatarId,
+    final this.hasAddIcon = true,
     final Key? key,
   }) : super(key: key);
 
@@ -35,7 +38,12 @@ class _ImagePickersState extends State<ImagePickers> {
   }
 
   @override
-  Widget build(final BuildContext context) => _imageForm();
+  Widget build(final BuildContext context) => widget.hasAddIcon
+      ? _imageForm()
+      : FillButton(
+          title: 'افزودن تصاویر',
+          onPressed: _showImageDialog,
+        );
 
   Widget _imageForm() => Center(
         child: InkWell(

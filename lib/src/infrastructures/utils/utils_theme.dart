@@ -22,6 +22,7 @@ class UtilsTheme {
         fillColor: Get.theme.colorScheme.background,
         enabledBorder: UtilsTheme.setOutlineBorder(
             color: Get.theme.colorScheme.primary, width: 1.0),
+
       );
 
   static TextStyle errorTextStyle() => TextStyle(color: Get.theme.errorColor);
