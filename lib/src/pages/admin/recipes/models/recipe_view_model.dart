@@ -1,3 +1,4 @@
+
 class RecipeViewModel {
   int id, duration;
   String foodName, recipeCategoryTitle, nationalityName;
@@ -9,6 +10,7 @@ class RecipeViewModel {
     required final this.recipeCategoryTitle,
     required final this.nationalityName,
   });
+
   factory RecipeViewModel.fromJson(final Map<String, dynamic> json) =>
       RecipeViewModel(
         id: json['id'],

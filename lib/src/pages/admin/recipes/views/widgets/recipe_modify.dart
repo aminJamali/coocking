@@ -3,10 +3,15 @@ import 'package:get/get.dart';
 
 import '../../../../../infrastructures/utils/utils.dart';
 import '../../../../../infrastructures/utils/utils_theme.dart';
+import '../../../../shared/views/fill_button.dart';
 import '../../controllers/recipe_modify_base_controller.dart';
 import '../../models/recipe_category_view_model.dart';
 import '../../models/recipe_nationality_view_model.dart';
+import '../utils/recipe_utils.dart';
 import 'duration_picker.dart';
+import 'recipe_modify_document.dart';
+import 'recipe_modify_ingredient.dart';
+import 'recipe_modify_step_operation.dart';
 
 class RecipeModify<T extends RecipeModifyBaseController> extends GetView<T> {
   const RecipeModify({final Key? key}) : super(key: key);
@@ -31,37 +36,67 @@ class RecipeModify<T extends RecipeModifyBaseController> extends GetView<T> {
           child: Form(
             key: controller.modifyRecipeFormKey,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  _foodName(),
-                  Utils.largeVerticalSpace,
-                  DurationPicker(
-                    title: 'زمان پخت*',
-                    duration: controller.duration,
-                    onDurationChange: (final duration) =>
-                        controller.duration = duration,
-                  ),
-                  Utils.largeVerticalSpace,
-                  _category(),
-                  Utils.largeVerticalSpace,
-                  _nationalities(),
-                  Utils.largeVerticalSpace,
-                  Divider(
-                    thickness: Utils.smallSpace,
-                    color: Get.theme.colorScheme.secondary,
-                    indent: Utils.largeSpace,
-                    endIndent: Utils.largeSpace,
-                  ),
-                  Utils.largeVerticalSpace,
-                ],
+              padding: Utils.middlePadding,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _foodName(),
+                    Utils.largeVerticalSpace,
+                    _duration(),
+                    Utils.largeVerticalSpace,
+                    _category(),
+                    Utils.largeVerticalSpace,
+                    _nationalities(),
+                    Utils.largeVerticalSpace,
+                    _divider(),
+                    Utils.largeVerticalSpace,
+                    RecipeModifyIngredient<T>(),
+                    Utils.largeVerticalSpace,
+                    _divider(),
+                    Utils.largeVerticalSpace,
+                    RecipeModifyStepOperation<T>(),
+                    Utils.largeVerticalSpace,
+                    _divider(),
+                    Utils.largeVerticalSpace,
+                    RecipeModifyDocument<T>(),
+                    Utils.largeVerticalSpace,
+                    _divider(),
+                    Utils.largeVerticalSpace,
+                    Utils.largeVerticalSpace,
+                    _submitButton(),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       );
 
+  Widget _submitButton() => Obx(() => FillButton(
+        title: 'ذخیره',
+        loading: controller.submitLoading.value,
+        onPressed: controller.onSubmitTaped,
+      ));
+
+  Widget _divider() => Divider(
+        thickness: Utils.smallSpace,
+        color: Get.theme.colorScheme.secondary,
+        indent: Utils.largeSpace,
+        endIndent: Utils.largeSpace,
+      );
+
+  Widget _duration() => Container(
+        padding: Utils.middlePadding,
+        decoration: RecipeUtils.itemDecoration(),
+        child: DurationPicker(
+          title: 'زمان پخت*',
+          duration: controller.duration,
+          onDurationChange: (final duration) => controller.duration = duration,
+        ),
+      );
+
   Widget _foodName() => TextFormField(
+      controller: controller.foodNameTextController,
       validator: Utils.validateText,
       decoration: UtilsTheme.textFormFieldDecoration(
           hint: 'مثال: کاچی', label: 'نام غذا*'));
