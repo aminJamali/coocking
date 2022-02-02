@@ -33,6 +33,7 @@ class RecipeModifyStepOperation<T extends RecipeModifyBaseController>
         () => controller.stepOperationListLoading.value
             ? const CircularProgressIndicator()
             : DropdownButtonFormField<StepOperationViewModel>(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: controller.stepDropdownKey,
                 value: controller.selectedStepOperation,
                 decoration:

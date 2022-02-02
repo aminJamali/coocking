@@ -13,6 +13,7 @@ class RecipeModifyDocument <T extends RecipeModifyBaseController>
 
   @override
   Widget build(final BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.end,
     children: [
       ImagePickers(
         onPickFile: controller.addDocuments,

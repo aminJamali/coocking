@@ -18,11 +18,19 @@ class RecipePage extends GetView<RecipeController> {
       );
 
   Widget _addButton() => FloatingActionButton(
-        onPressed: () => Get.toNamed(
-          '${Routes.recipePage}${Routes.registerRecipePage}',
-        ),
+        onPressed: _onRegisterTaped,
         child: const Icon(Icons.add),
       );
+
+  void _onRegisterTaped() => Get.toNamed(
+        '${Routes.recipePage}${Routes.registerRecipePage}',
+      )?.then(_onDismissRegisterPage);
+
+  void _onDismissRegisterPage(final recipeViewModel) {
+    if (recipeViewModel != null) {
+      controller.addToLocalList(recipeViewModel: recipeViewModel);
+    }
+  }
 
   AppBar _appBar() => AppBar(
         title: const Text('دستور پخت'),

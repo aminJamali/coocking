@@ -17,19 +17,27 @@ class RecipeModify<T extends RecipeModifyBaseController> extends GetView<T> {
   const RecipeModify({final Key? key}) : super(key: key);
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final BuildContext context) =>
+      Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: _appBar(),
-        body: _body(),
+        body: Obx(
+              () =>
+          controller.getInitLoading.value
+              ? const Center(child: CircularProgressIndicator())
+              : _body(),
+        ),
       );
 
-  AppBar _appBar() => AppBar(
+  AppBar _appBar() =>
+      AppBar(
         title: Text(controller.pageTitle),
         centerTitle: true,
         excludeHeaderSemantics: true,
       );
 
-  Widget _body() => Align(
+  Widget _body() =>
+      Align(
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: Utils.maxWith),
@@ -72,67 +80,80 @@ class RecipeModify<T extends RecipeModifyBaseController> extends GetView<T> {
         ),
       );
 
-  Widget _submitButton() => Obx(() => FillButton(
-        title: 'ذخیره',
-        loading: controller.submitLoading.value,
-        onPressed: controller.onSubmitTaped,
-      ));
+  Widget _submitButton() =>
+      Obx(() =>
+          FillButton(
+            title: 'ذخیره',
+            loading: controller.submitLoading.value,
+            onPressed: controller.onSubmitTaped,
+          ));
 
-  Widget _divider() => Divider(
+  Widget _divider() =>
+      Divider(
         thickness: Utils.smallSpace,
         color: Get.theme.colorScheme.secondary,
         indent: Utils.largeSpace,
         endIndent: Utils.largeSpace,
       );
 
-  Widget _duration() => Container(
+  Widget _duration() =>
+      Container(
         padding: Utils.middlePadding,
         decoration: RecipeUtils.itemDecoration(),
-        child: DurationPicker(
-          title: 'زمان پخت*',
-          duration: controller.duration,
-          onDurationChange: (final duration) => controller.duration = duration,
-        ),
+        child: Obx(() => DurationPicker(
+            title: 'زمان پخت*',
+            duration: controller.duration.value,
+            onDurationChange: (final duration) =>
+            controller.duration.value = duration,
+          )),
       );
 
-  Widget _foodName() => TextFormField(
-      controller: controller.foodNameTextController,
-      validator: Utils.validateText,
-      decoration: UtilsTheme.textFormFieldDecoration(
-          hint: 'مثال: کاچی', label: 'نام غذا*'));
+  Widget _foodName() =>
+      TextFormField(
+          controller: controller.foodNameTextController,
+          validator: Utils.validateText,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: UtilsTheme.textFormFieldDecoration(
+              hint: 'مثال: کاچی', label: 'نام غذا*'));
 
-  Widget _category() => Obx(
-        () => controller.categoryListLoading.value
+  Widget _category() =>
+      Obx(
+            () =>
+        controller.categoryListLoading.value
             ? const CircularProgressIndicator()
             : DropdownButtonFormField<RecipeCategoryViewModel>(
-                value: controller.selectedCategory,
-                decoration:
-                    UtilsTheme.textFormFieldDecoration(label: 'دسته بندی*'),
-                onSaved: controller.onCategorySelected,
-                onChanged: (final value) => {},
-                validator: (final value) => Utils.validateText(value?.title),
-                items: controller.categoryItems
-                    .map((final items) => DropdownMenuItem(
-                          value: items,
-                          child: Text(items.title),
-                        ))
-                    .toList()),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            value: controller.selectedCategory,
+            decoration:
+            UtilsTheme.textFormFieldDecoration(label: 'دسته بندی*'),
+            onChanged: controller.onCategorySelected,
+            validator: (final value) => Utils.validateText(value?.title),
+            items: controller.categoryItems
+                .map((final items) =>
+                DropdownMenuItem(
+                  value: items,
+                  child: Text(items.title),
+                ))
+                .toList()),
       );
 
-  Widget _nationalities() => Obx(
-        () => controller.nationalityListLoading.value
+  Widget _nationalities() =>
+      Obx(
+            () =>
+        controller.nationalityListLoading.value
             ? const CircularProgressIndicator()
             : DropdownButtonFormField<RecipeNationalityViewModel>(
-                value: controller.selectedNationality,
-                decoration: UtilsTheme.textFormFieldDecoration(label: 'ملیت*'),
-                onSaved: controller.onNationalitySelected,
-                onChanged: (final value) => {},
-                validator: (final value) => Utils.validateText(value?.name),
-                items: controller.nationalityItems
-                    .map((final items) => DropdownMenuItem(
-                          value: items,
-                          child: Text(items.name),
-                        ))
-                    .toList()),
+            value: controller.selectedNationality,
+            decoration: UtilsTheme.textFormFieldDecoration(label: 'ملیت*'),
+            onChanged: controller.onNationalitySelected,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (final value) => Utils.validateText(value?.name),
+            items: controller.nationalityItems
+                .map((final items) =>
+                DropdownMenuItem(
+                  value: items,
+                  child: Text(items.name),
+                ))
+                .toList()),
       );
 }

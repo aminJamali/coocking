@@ -20,6 +20,7 @@ class DurationPicker extends StatefulWidget {
 }
 
 class _DurationPickerState extends State<DurationPicker> {
+
   int _minute = 0;
   int _hour = 0;
   int _selectedDuration = 0;
@@ -28,16 +29,18 @@ class _DurationPickerState extends State<DurationPicker> {
 
   @override
   void initState() {
-    if (widget.duration != null) {
-      _minute = Utils.convertDurationToMinute(widget.duration!);
-      _hour = Utils.convertDurationToMinute(widget.duration!);
-    }
+
     super.initState();
   }
 
   @override
-  Widget build(final BuildContext context) =>
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+  Widget build(final BuildContext context) {
+    if (widget.duration != null&& widget.duration!=0) {
+      _minute = Utils.convertDurationToMinute(widget.duration!);
+      _hour = Utils.convertDurationToHour(widget.duration!);
+    }
+
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(widget.title),
         const Spacer(),
         NumberPicker(
@@ -79,6 +82,7 @@ class _DurationPickerState extends State<DurationPicker> {
         ),
         const Spacer(),
       ]);
+  }
 
   void _onMinuteChange(final int minute) {
     setState(() {

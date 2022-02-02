@@ -1,4 +1,3 @@
-import 'package:cooking/src/infrastructures/styles/cooking_theme_data.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -7,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../commons/advance_http_client.dart';
 import '../commons/parameters.dart';
+import '../styles/cooking_theme_data.dart';
 
 class Utils {
   static const double tinySpace = 2;
@@ -74,17 +74,23 @@ class Utils {
   static AdvanceHttpClient http() {
     final AdvanceHttpClient _httpclient = AdvanceHttpClient(
       baseUrl: Parameters.fullUrl,
-      handleExceptionCallBack:(final key)=> errorToast(message: key),
+      handleExceptionCallBack: (final key) => errorToast(message: key),
     );
     return _httpclient;
   }
 
   static void errorToast({required final String message}) =>
       Fluttertoast.showToast(
-          msg: message, backgroundColor: Get.theme.colorScheme.error);
+          gravity: ToastGravity.TOP,
+          msg: message,
+          backgroundColor: Get.theme.colorScheme.error);
 
   static void successToast({required final String message}) =>
-      Fluttertoast.showToast(msg: message, backgroundColor: successColor);
+      Fluttertoast.showToast(
+          gravity: ToastGravity.TOP,
+          webPosition: 'center',
+          msg: message,
+          backgroundColor: successColor);
 
   static Future<FormData> convertToByte(
     final XFile fileDetails,
@@ -97,16 +103,16 @@ class Utils {
     return formData;
   }
 
- static String convertDurationToTime(final int duration) {
+  static String convertDurationToTime(final int duration) {
     final String hour =
-    convertDurationToHour(duration).toString().padLeft(2, '0');
+        convertDurationToHour(duration).toString().padLeft(2, '0');
     final String minute =
-    convertDurationToMinute(duration).toString().padLeft(2, '0');
+        convertDurationToMinute(duration).toString().padLeft(2, '0');
 
     return '$hour:$minute';
   }
 
- static int convertDurationToHour(final int duration) => duration ~/ 60;
+  static int convertDurationToHour(final int duration) => duration ~/ 60;
 
- static int convertDurationToMinute(final int duration) => duration % 60;
+  static int convertDurationToMinute(final int duration) => duration % 60;
 }

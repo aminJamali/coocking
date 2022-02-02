@@ -39,6 +39,7 @@ abstract class IngredientsModifyController extends GetxController {
         result = true;
       },
     );
+
     return result;
   }
 

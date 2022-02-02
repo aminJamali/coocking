@@ -8,10 +8,15 @@ import '../../ingredients/models/ingredients_view_model.dart';
 import '../../step_operations/models/step_operation_list_view_model.dart';
 import '../../step_operations/models/step_operation_view_model.dart';
 import '../models/recipe_category_view_model.dart';
+import '../models/recipe_documents_dto.dart';
+import '../models/recipe_ingredients_dto.dart';
 import '../models/recipe_ingredients_view_model.dart';
+import '../models/recipe_insert_dto.dart';
 import '../models/recipe_nationality_list_view_model.dart';
 import '../models/recipe_nationality_view_model.dart';
+import '../models/recipe_steps_dto.dart';
 import '../models/recipe_steps_view_model.dart';
+import '../models/recipe_view_model.dart';
 import '../repositories/recipe_modify_repository.dart';
 
 abstract class RecipeModifyBaseController extends GetxController {
@@ -26,11 +31,12 @@ abstract class RecipeModifyBaseController extends GetxController {
   GlobalKey<FormFieldState> ingredientDropdownKey = GlobalKey<FormFieldState>();
   GlobalKey<FormFieldState> stepDropdownKey = GlobalKey<FormFieldState>();
 
-  int? duration;
+  RxInt duration=0.obs;
   RxBool categoryListLoading = false.obs,
       nationalityListLoading = false.obs,
       ingredientListLoading = false.obs,
       stepOperationListLoading = false.obs,
+  getInitLoading=false.obs,
   submitLoading=false.obs;
 
   RecipeCategoryViewModel? selectedCategory;
@@ -213,7 +219,7 @@ abstract class RecipeModifyBaseController extends GetxController {
       Utils.errorToast(message: 'اطلاعات تکمیل نشده است!');
       result=false;
     }
-    if(duration==0){
+    if(duration.value==0){
       Utils.errorToast(message: 'زمان پخت مشخص نشده است!');
       result=false;
     }
@@ -241,4 +247,67 @@ abstract class RecipeModifyBaseController extends GetxController {
   }
 
   void onSubmitTaped();
+
+  RecipeViewModel setFinalRecipeViewModel(final int id) => RecipeViewModel(
+    id: id,
+    duration: duration.value,
+    foodName: foodNameTextController.text,
+    nationalityName: selectedNationality!.name,
+    recipeCategoryTitle: selectedCategory!.title,
+  );
+
+  RecipeInsertDto setRecipeInsertDto() => RecipeInsertDto(
+      foodName: foodNameTextController.text,
+      duration: duration.value,
+      recipeCategoryId: selectedCategory!.id,
+      nationalityId: selectedNationality!.id,
+      recipeIngredients: _setRecipeIngredientsDto(),
+      recipeDocuments: _setRecipeDocumentsDto(),
+      recipeSteps: _setRecipeStepsDto());
+
+  List<RecipeIngredientsDto> _setRecipeIngredientsDto() {
+    final List<RecipeIngredientsDto> _recipeIngredientsDtoList =
+    <RecipeIngredientsDto>[];
+
+    for (final RecipeIngredientsViewModel element in ingredientsList) {
+      final RecipeIngredientsDto _recipeIngredientsDto = RecipeIngredientsDto(
+        quantity: element.quantity,
+        ingredientId: element.ingredientId,
+      );
+      _recipeIngredientsDtoList.add(_recipeIngredientsDto);
+    }
+
+    return _recipeIngredientsDtoList;
+  }
+
+  List<RecipeDocumentsDto> _setRecipeDocumentsDto() {
+    final List<RecipeDocumentsDto> _recipeDocumentsDtoList =
+    <RecipeDocumentsDto>[];
+
+    for (final String element in documentsList) {
+      final RecipeDocumentsDto _recipeIngredientsDto = RecipeDocumentsDto(
+        documentId: element,
+        extension: 'jpg',
+      );
+      _recipeDocumentsDtoList.add(_recipeIngredientsDto);
+    }
+
+    return _recipeDocumentsDtoList;
+  }
+
+  List<RecipeStepsDto> _setRecipeStepsDto() {
+    final List<RecipeStepsDto> _recipeStepsDtoList = <RecipeStepsDto>[];
+    int _order = 0;
+    for (final RecipeStepsViewModel element in operationsList) {
+      final RecipeStepsDto _recipeIngredientsDto = RecipeStepsDto(
+        stepOperationId: element.stepOperationId,
+        description: element.description,
+        order: _order,
+      );
+      _recipeStepsDtoList.add(_recipeIngredientsDto);
+      _order++;
+    }
+
+    return _recipeStepsDtoList;
+  }
 }

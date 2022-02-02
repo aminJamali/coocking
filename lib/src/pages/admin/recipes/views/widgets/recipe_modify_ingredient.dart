@@ -33,6 +33,7 @@ class RecipeModifyIngredient<T extends RecipeModifyBaseController>
         () => controller.ingredientListLoading.value
             ? const CircularProgressIndicator()
             : DropdownButtonFormField<IngredientsViewModel>(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: controller.ingredientDropdownKey,
                 value: controller.selectedIngredient,
                 decoration:
@@ -41,7 +42,8 @@ class RecipeModifyIngredient<T extends RecipeModifyBaseController>
                 items: controller.ingredientsItems
                     .map((final items) => DropdownMenuItem(
                           value: items,
-                          child: Text(items.title),
+                          child: Text(
+                              '${items.title} - ${items.ingredientUnitTitle}'),
                         ))
                     .toList()),
       );
@@ -50,7 +52,7 @@ class RecipeModifyIngredient<T extends RecipeModifyBaseController>
       controller: controller.ingredientCountTextController,
       keyboardType: TextInputType.number,
       decoration:
-          UtilsTheme.textFormFieldDecoration(hint: 'مثال: 2', label: 'تعداد'));
+          UtilsTheme.textFormFieldDecoration(hint: 'مثال: 2', label: 'مقدار'));
 
   Widget _items() => Container(
         width: Get.width,

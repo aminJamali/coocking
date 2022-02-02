@@ -1,10 +1,10 @@
-import 'package:cooking/src/pages/admin/ingredients/models/ingredients_list_view_model.dart';
-import 'package:cooking/src/pages/admin/step_operations/models/step_operation_list_view_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../infrastructures/commons/advance_http_client.dart';
 import '../../../../infrastructures/commons/url_repository.dart';
 import '../../../../infrastructures/utils/utils.dart';
+import '../../ingredients/models/ingredients_list_view_model.dart';
+import '../../step_operations/models/step_operation_list_view_model.dart';
 import '../models/recipe_category_view_model.dart';
 import '../models/recipe_full_view_model.dart';
 import '../models/recipe_insert_dto.dart';
