@@ -116,7 +116,6 @@ class AdvanceHttpClient {
       return _onDioError(dioError, disableHandleException);
     }
   }
-
   Future<Either<String, dynamic>> put(
       final String url, {
        final bool disableHandleException = false,

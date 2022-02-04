@@ -7,14 +7,14 @@ import '../../models/ingredients_view_model.dart';
 
 class IngredientsListItem extends StatelessWidget {
   final IngredientsViewModel ingredientsViewModel;
-  final void Function()? onEditTaped;
-  final void Function()? onDeleteTaped;
+  final void Function() onEditTaped;
+  final void Function() onDeleteTaped;
 
   const IngredientsListItem({
     required final this.ingredientsViewModel,
+    required final this.onEditTaped,
+    required final this.onDeleteTaped,
     final Key? key,
-    final this.onEditTaped,
-    final this.onDeleteTaped,
   }) : super(key: key);
 
   @override
@@ -33,7 +33,6 @@ class IngredientsListItem extends StatelessWidget {
 
   Widget _item() => Row(
         children: [
-
           AdvanceNetworkImage(
             imageSize: 80,
             documentId: ingredientsViewModel.avatarId,

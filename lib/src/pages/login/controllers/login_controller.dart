@@ -1,10 +1,10 @@
-import 'package:cooking/src/pages/shared/models/token_info.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../../infrastructures/commons/parameters.dart';
 import '../../../infrastructures/routes/routes.dart';
+import '../../shared/models/token_info.dart';
 import '../models/login_dto.dart';
 import '../repositories/login_repository.dart';
 

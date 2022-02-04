@@ -20,6 +20,7 @@ class DurationPicker extends StatefulWidget {
 }
 
 class _DurationPickerState extends State<DurationPicker> {
+
   int _minute = 0;
   int _hour = 0;
   int _selectedDuration = 0;
@@ -28,69 +29,60 @@ class _DurationPickerState extends State<DurationPicker> {
 
   @override
   void initState() {
-    if (widget.duration != null) {
-      _minute = Utils.convertDurationToMinute(widget.duration!);
-      _hour = Utils.convertDurationToMinute(widget.duration!);
-    }
+
     super.initState();
   }
 
   @override
-  Widget build(final BuildContext context) => Container(
-        padding: Utils.middlePadding,
-        decoration: _decoration(context),
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(widget.title),
-          const Spacer(),
-          NumberPicker(
-            value: _minute,
-            minValue: 0,
-            maxValue: 59,
-            itemCount: 2,
-            zeroPad: true,
-            itemWidth: _itemWidth,
-            itemHeight: _itemHeight,
-            textStyle: TextStyle(
-                color: Theme.of(context).colorScheme.primary, fontSize: 16.0),
-            selectedTextStyle: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.bold,
-                fontSize: 28.0),
-            onChanged: _onMinuteChange,
-          ),
-          Text(
-            ':',
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.primary, fontSize: 16.0),
-          ),
-          NumberPicker(
-            value: _hour,
-            minValue: 0,
-            maxValue: 99,
-            itemCount: 2,
-            zeroPad: true,
-            itemWidth: _itemWidth,
-            itemHeight: _itemHeight,
-            textStyle: TextStyle(
-                color: Theme.of(context).colorScheme.primary, fontSize: 16.0),
-            selectedTextStyle: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.bold,
-                fontSize: 28.0),
-            onChanged: _onHourChange,
-          ),
-          const Spacer(),
-        ]),
-      );
+  Widget build(final BuildContext context) {
+    if (widget.duration != null&& widget.duration!=0) {
+      _minute = Utils.convertDurationToMinute(widget.duration!);
+      _hour = Utils.convertDurationToHour(widget.duration!);
+    }
 
-  BoxDecoration _decoration(final BuildContext context) => BoxDecoration(
-      border: Border.all(
-        color: Theme.of(context).colorScheme.primary,
-        width: 1.0,
-      ),
-      borderRadius: const BorderRadius.all(
-        Radius.circular(Utils.middleSpace),
-      ));
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text(widget.title),
+        const Spacer(),
+        NumberPicker(
+          value: _minute,
+          minValue: 0,
+          maxValue: 59,
+          itemCount: 2,
+          zeroPad: true,
+          itemWidth: _itemWidth,
+          itemHeight: _itemHeight,
+          textStyle: TextStyle(
+              color: Theme.of(context).colorScheme.primary, fontSize: 16.0),
+          selectedTextStyle: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.bold,
+              fontSize: 28.0),
+          onChanged: _onMinuteChange,
+        ),
+        Text(
+          ':',
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.primary, fontSize: 16.0),
+        ),
+        NumberPicker(
+          value: _hour,
+          minValue: 0,
+          maxValue: 99,
+          itemCount: 2,
+          zeroPad: true,
+          itemWidth: _itemWidth,
+          itemHeight: _itemHeight,
+          textStyle: TextStyle(
+              color: Theme.of(context).colorScheme.primary, fontSize: 16.0),
+          selectedTextStyle: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.bold,
+              fontSize: 28.0),
+          onChanged: _onHourChange,
+        ),
+        const Spacer(),
+      ]);
+  }
 
   void _onMinuteChange(final int minute) {
     setState(() {
