@@ -13,7 +13,8 @@ class ModifyStepOperationRepository {
   }
   Future<Either<String, StepOperationViewModel>> getStepOperationById(
       {required final int id}) async {
-    final String _url = UrlRepository.getStepOpeartionsUrl(stepOperationId: id);
+    final String _url =
+        UrlRepository.getStepOpeartionByIdUrl(stepOperationId: id);
     final Either<String, dynamic> response = await _httpClient.get(
       _url,
     );
@@ -38,7 +39,7 @@ class ModifyStepOperationRepository {
       {required final AddStepOperationDto addstepOperationDto,
       required final int stepOperationId}) async {
     final String _url =
-        UrlRepository.getStepOpeartionsUrl(stepOperationId: stepOperationId);
+        UrlRepository.getStepOpeartionByIdUrl(stepOperationId: stepOperationId);
     final Either<String, dynamic> response =
         await _httpClient.put(_url, data: addstepOperationDto.toJson());
     return response.fold(

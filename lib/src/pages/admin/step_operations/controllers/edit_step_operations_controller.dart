@@ -11,8 +11,17 @@ class EditStepOperationController extends ModifyStepOperationController {
   ModifyStepOperationRepository repository = ModifyStepOperationRepository();
 
   @override
+  void onInit() {
+    stepOperationViewModel = initStepOperationViewModel;
+    addStepOperationDto.avatarId = initStepOperationViewModel.avatarId;
+    addStepOperationDto.extension = initStepOperationViewModel.extension;
+    super.onInit();
+  }
+
+  @override
   void modifyStepOperation() {
-    if (modifyMaterialFormKey.currentState!.validate()) {
+    if (modifyMaterialFormKey.currentState!.validate() &&
+        initStepOperationViewModel.avatarId!.isNotEmpty) {
       if (addStepOperationDto.avatarId != null) {
         modifyMaterialFormKey.currentState!.save();
         editStepOperation();

@@ -1,3 +1,4 @@
+import 'package:cooking/src/pages/admin/step_operations/commons/step_operation_bindings.dart';
 import 'package:cooking/src/pages/admin/step_operations/views/step_operations_page.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +37,7 @@ final pages = [
     page: () => const DrawerScreen(),
   ),
   GetPage(
-    name: Routes.stepOperationsPage,
-    page: () => const StepOperationsPage(),
-  ),
+      name: Routes.stepOperationsPage,
+      page: () => const StepOperationsPage(),
+      binding: StepOperationBindings()),
 ];

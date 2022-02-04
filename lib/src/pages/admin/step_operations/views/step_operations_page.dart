@@ -1,5 +1,6 @@
 import 'package:cooking/src/infrastructures/utils/utils.dart';
 import 'package:cooking/src/pages/admin/step_operations/controllers/add_step_operation_controller.dart';
+import 'package:cooking/src/pages/admin/step_operations/views/widgets/step_operation_list.dart';
 import 'package:flutter/material.dart';
 
 import 'dialog/modify_step_operations_dialog.dart';
@@ -16,8 +17,17 @@ class StepOperationsPage extends StatelessWidget {
         centerTitle: true,
         excludeHeaderSemantics: true,
       ),
+      body: _body(),
     );
   }
+
+  Widget _body() => Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: Utils.maxWith),
+          child: StepOperationList(),
+        ),
+      );
 
   Widget _addButton() => FloatingActionButton(
         onPressed: _onAddTaped,

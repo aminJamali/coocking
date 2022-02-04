@@ -61,7 +61,7 @@ class DeleteDialog extends StatelessWidget {
       );
 
   Widget _submitButton() => Row(
-     mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FillButton(
             title: doneButtonTitle,
@@ -70,7 +70,7 @@ class DeleteDialog extends StatelessWidget {
             style: UtilsTheme.errorFillButtonStyle(),
           ),
           AdvanceOutlinedButton(
-            title: '      بازگشت      ',
+            title: 'بازگشت',
             onPressed: Get.back,
             style: UtilsTheme.errorOutlineButtonStyle(),
           ),

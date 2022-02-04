@@ -34,7 +34,7 @@ class ModifyStepOperationsDialog<T extends ModifyStepOperationController>
                   Utils.largeVerticalSpace,
                   ImagePickers(
                     onPickFile: onImageSelected,
-                    avatarId: controller.addStepOperationDto.avatarId,
+                    avatarId: controller.stepOperationViewModel.avatarId,
                   ),
                   Padding(
                     padding: Utils.largePadding,
@@ -57,7 +57,7 @@ class ModifyStepOperationsDialog<T extends ModifyStepOperationController>
 
   Widget _title() => TextFormField(
         validator: Utils.validateText,
-        initialValue: controller.addStepOperationDto.title,
+        initialValue: controller.stepOperationViewModel.title,
         decoration: UtilsTheme.textFormFieldDecoration(
             hint: 'مثال: گوجه ها را خورد میکنیم', label: 'عنوان'),
         onSaved: (final value) => controller.addStepOperationDto.title = value!,

@@ -20,8 +20,8 @@ class UrlRepository {
   static String ingredientsUrlById({required final int ingredientId}) =>
       '$ingredientsUrl/$ingredientId';
 
-  static String getStepOpeartionsUrl({required final int stepOperationId}) =>
-      '/$ingredients/$stepOperationId';
+  static String getStepOpeartionByIdUrl({required final int stepOperationId}) =>
+      '$stepOperations/$stepOperationId';
 
   static String getAllIngredientsUrl({final String? query}) =>
       '/$ingredients$query';

@@ -12,15 +12,26 @@ class StepOperationRepository {
     _httpClient = Utils.http();
   }
 
-  Future<Either<String, StepOperationListViewModel>> getAllIngredients(
+  Future<Either<String, StepOperationListViewModel>> getAllStepOperations(
       {final String? query}) async {
-    final String _url = UrlRepository.getAllIngredientsUrl();
+    final String _url = UrlRepository.stepOperations;
     final Either<String, dynamic> response = await _httpClient!.get(
       _url,
     );
     return response.fold(
       Left.new,
       (final data) => Right(StepOperationListViewModel.fromJson(data)),
+    );
+  }
+
+  Future<Either<String, String>> deleteStepOperation(
+      {required final int stepOperationId}) async {
+    final String _url =
+        UrlRepository.getStepOpeartionByIdUrl(stepOperationId: stepOperationId);
+    final Either<String, dynamic> response = await _httpClient!.delete(_url);
+    return response.fold(
+      Left.new,
+      (final data) => Right(data as String),
     );
   }
 }
